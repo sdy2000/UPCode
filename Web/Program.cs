@@ -1,3 +1,5 @@
+using Core.Servises;
+using Core.Servises.Interfaces;
 using DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,13 @@ builder.Services.AddDbContext<UPCodeContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("UPCodeConnection"));
 });
+
+#endregion
+
+
+#region IoC
+
+builder.Services.AddTransient<IUserService, UserService>();
 
 #endregion
 
