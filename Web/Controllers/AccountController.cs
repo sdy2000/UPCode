@@ -36,38 +36,28 @@ namespace Web.Controllers
             if (!ModelState.IsValid || register.Password != register.RePassword)
                 return View(register);
 
-            if (_userService.IsExistUserName(register.UserName))
+            IsRegisterViewModel isRegister = _userService.RegisterUser(register);
+
+            if (!isRegister.IsSuccess)
             {
-                ModelState.AddModelError("UserName", "نام کاربری تکراری میباشد !");
+                if (isRegister.IsExistUserName)
+                    ModelState.AddModelError("UserName", "نام کاربری تکراری میباشد !");
+                
+                if (isRegister.IsExistEmail)
+                    ModelState.AddModelError("Email", "ایمیل وارد شده تکراری میباشد !");
+                
+                if (!isRegister.IsSendActiovationEmail)
+                    ModelState.AddModelError("Email", "مشکلی در ارسال ایمیل فعال سازی رخ داده است !");
+                
+                if (!isRegister.IsAddUser)
+                    ModelState.AddModelError("Email", "خطایی رخ داده است لطفا بعدا تلاش بفرمایید !");
+
+
                 return View(register);
             }
-            if (_userService.IsExistEmail(register.Email))
-            {
-                ModelState.AddModelError("Email", "ایمیل وارد شده تکراری میباشد !");
-            }
-
-            var user = new User()
-            {
-                UserName = register.UserName,
-                Email = FixedText.FixedEmail(register.Email),
-                ActiveCode = NameGenerator.GeneratorUniqCode(),
-                IsActive = false,
-                Password = PasswordHelper.EncodePasswordMd5(register.Password),
-                UserAvatar = "No-Photo.jpg"
-            };
-
-            // TODO : Add User
 
 
-            #region SEND ACTIVATION EMAIL
-
-            // TODO : Send Activation Email
-
-            #endregion
-
-
-            // TODO Add _SuccessRegister View
-            return View("_SuccessRegister", user);
+            return View("_SuccessRegister", register);
         }
 
         #endregion

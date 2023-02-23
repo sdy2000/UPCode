@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DataLayer.Entities.User;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTOs
 {
@@ -32,5 +33,13 @@ namespace Core.DTOs
         [Display(Name = "قوانین و مقررات")]
         [Required(ErrorMessage = "لطفا {0} را تایید نمایید.")]
         public bool Rules { get; set; }
+    }
+    public class IsRegisterViewModel
+    {
+        public bool IsExistUserName { get; set; }
+        public bool IsExistEmail { get; set; }
+        public bool IsAddUser { get; set; }
+        public bool IsSendActiovationEmail { get; set; }
+        public bool IsSuccess { get; set; }
     }
 }

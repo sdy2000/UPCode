@@ -1,0 +1,31 @@
+﻿@model Core.DTOs.RegisterViewModel
+@{
+    ViewData["Title"] = "پابان ثبت نام";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">آپ کد</a></li>
+            <li class="breadcrumb-item active" aria-current="page">پابان ثبت نام</li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main class="client-page">
+    <div class="container-content">
+        <header><h2> پابان ثبت نام </h2></header>
+        <hr />
+        <div class="alert alert-success">
+            <h3>@Model.UserName عزیز !</h3>
+            <p>
+                ثبت نام شما با موفقیت انجام شد , ایمیلی حاویه لینک فعال سازی به ایمیل @Model.Email ارسال شده .
+            </p>
+            <p>
+                جهت ادامه روند ثبت نام وارد ایمیل شده و اکانت خود را فعال نمایید !
+            </p>
+        </div>
+    </div>
+</main>
