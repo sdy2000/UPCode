@@ -1,0 +1,71 @@
+﻿@model Core.DTOs.RegisterViewModel
+@{
+    ViewData["Title"] = "ثبت نام";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">آپ کد</a></li>
+            <li class="breadcrumb-item active" aria-current="page">عضویت در سایت</li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main class="client-page">
+    <div class="container-content">
+
+        <header><h2> عضویت در سایت </h2></header>
+
+        <div class="form-layer">
+
+            <form asp-action="Register" method="post">
+
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                    <input asp-for="@Model.UserName" type="text" class="form-control" placeholder="نام کاربری" aria-describedby="username">
+                </div>
+                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                    <input asp-for="@Model.Email" type="email" class="form-control" placeholder="ایمیل" aria-describedby="email-address">
+                </div>
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
+                    <input asp-for="@Model.Password" type="password" class="form-control" placeholder="کلمه عبور " aria-describedby="password">
+                </div>
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
+                    <input asp-for="@Model.RePassword" type="password" class="form-control" placeholder="تکرار کلمه عبور " aria-describedby="password">
+                </div>
+                <span asp-validation-for="@Model.RePassword" class="text-danger"></span>
+
+                <div class="accept-rules">
+                    <label>
+                        <input asp-for="@Model.Rules" type="checkbox">
+                        <a href="/Rules"> قوانین و مقررات سایت </a> را میپذیرم
+                    </label>
+                </div>
+                <span asp-validation-for="@Model.Rules" class="text-danger"></span>
+
+                <div class="link">
+                    <a href="/Login"> <i class="zmdi zmdi-account"></i> ورود به سایت </a>
+                </div>
+
+                <button class="btn btn-success"> عضویت در سایت </button>
+
+
+            </form>
+        </div>
+
+    </div>
+</main>
