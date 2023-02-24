@@ -9,9 +9,9 @@ namespace DataLayer.Entities.User
         public int GenderId { get; set; }
 
 
-        [Display(Name = "جنسیت")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Gender")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string GenderTitle { get; set; }
 
 

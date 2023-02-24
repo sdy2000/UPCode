@@ -5,33 +5,33 @@ namespace Core.DTOs
 {
     public class RegisterViewModel
     {
-        [Display(Name = "نام کاربری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "UserName")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string UserName { get; set; }
 
 
-        [Display(Name = "ایمیل")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string Email { get; set; }
 
 
-        [Display(Name = "کلمه عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(20, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
-        [MinLength(6, ErrorMessage = "{0} نمیتواند کمتر از {1} باشد!")]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(20, ErrorMessage = "{0} cannot be greater than {1}!")]
+        [MinLength(6, ErrorMessage = "{0} cannot be less than {1}!")]
         public string Password { get; set; }
 
 
-        [Compare("Password", ErrorMessage = "کلمه های عبور مغایرت دارند!")]
-        [Display(Name = "کلمه عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [Compare("Password", ErrorMessage = "Passwords are inconsistent!")]
+        [Display(Name = "RePassword")]
+        [Required(ErrorMessage = "Please enter {0}.")]
         public string RePassword { get; set; }
 
 
-        [Display(Name = "قوانین و مقررات")]
-        [Required(ErrorMessage = "لطفا {0} را تایید نمایید.")]
+        [Display(Name = "Terms and Conditions")]
+        [Required(ErrorMessage = "Please enter {0}.")]
         public bool Rules { get; set; }
     }
     public class IsRegisterViewModel

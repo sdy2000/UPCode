@@ -112,7 +112,7 @@ namespace Core.Servises
                 try
                 {
                     string body = EmailBodyGenerator.SendActiveEmail(user.UserName, user.ActiveCode);
-                    bool isSendEmail = SendEmail.Send(user.Email, "فعال سازی", body);
+                    bool isSendEmail = SendEmail.Send(user.Email, "Activation", body);
 
                     result.IsSendActiovationEmail = true;
                 }

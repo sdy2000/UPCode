@@ -41,16 +41,16 @@ namespace Web.Controllers
             if (!isRegister.IsSuccess)
             {
                 if (isRegister.IsExistUserName)
-                    ModelState.AddModelError("UserName", "نام کاربری تکراری میباشد !");
+                    ModelState.AddModelError("UserName", "Duplicate username!");
                 
                 if (isRegister.IsExistEmail)
-                    ModelState.AddModelError("Email", "ایمیل وارد شده تکراری میباشد !");
+                    ModelState.AddModelError("Email", "The entered email is duplicate!");
                 
                 if (!isRegister.IsSendActiovationEmail)
-                    ModelState.AddModelError("Email", "مشکلی در ارسال ایمیل فعال سازی رخ داده است !");
+                    ModelState.AddModelError("Email", "There was a problem sending the activation email!");
                 
                 if (!isRegister.IsAddUser)
-                    ModelState.AddModelError("Email", "خطایی رخ داده است لطفا بعدا تلاش بفرمایید !");
+                    ModelState.AddModelError("Email", "An error has occurred, please try again later!");
 
 
                 return View(register);

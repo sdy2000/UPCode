@@ -6,8 +6,8 @@
 CKEDITOR.editorConfig = function (config) {
     // Define changes to default configuration here. For example:
     // config.uiColor = '#AADC6E';
-    config.contentsLangDirection = 'rtl';
-    config.language = 'fa';
+    config.contentsLangDirection = 'ltr';
+    config.language = 'en';
     config.filebrowserImageUploadUrl = '/file-upload';
     config.toolbar = 'MyToolbar';
 

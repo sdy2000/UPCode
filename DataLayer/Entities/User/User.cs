@@ -9,61 +9,62 @@ namespace DataLayer.Entities.User
         public int UserId { get; set; }
 
 
-        [Display(Name = "جنسیت")]
+        [Display(Name = "Gender")]
         public int? GenderId { get; set; }
 
 
-        [Display(Name = "نام کاربری")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "UserName")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string UserName { get; set; }
 
 
-        [Display(Name = "نام")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Name")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? FirstName { get; set; }
 
 
-        [Display(Name = "نام خانوادگی")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Last Name")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? LastName { get; set; }
 
 
-        [Display(Name = "ایمیل")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string Email { get; set; }
 
 
-        [Display(Name = "شماره موبایل")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Phone Number")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? PhonNumber { get; set; }
 
 
-        [Display(Name = "کلمه عبور")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Please enter {0}.")]
         public string Password { get; set; }
 
 
-        [Display(Name = "تصویر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [Display(Name = "Avatar")]
+        [Required(ErrorMessage = "Please enter {0}.")]
         public string UserAvatar { get; set; }
 
 
-        [Display(Name = "کد فعال سازی")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [Display(Name = "Active Code")]
+        [Required(ErrorMessage = "Please enter {0}.")]
         public string ActiveCode { get; set; }
 
 
-        [Display(Name = "وضعیت")]
+        [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
 
 
-        [Display(Name = "تاریخ ثبت نام")]
+        [Display(Name = "Reagister Date")]
         public DateTime RegisterDate { get; set; } = DateTime.Now;
 
 
-        [Display(Name = "حذف شده است؟")]
+        [Display(Name = "Is Deleted")]
         public bool IsDelete { get; set; }
 
 

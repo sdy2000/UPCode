@@ -1,13 +1,13 @@
 ﻿@model Core.DTOs.RegisterViewModel
 @{
-    ViewData["Title"] = "پابان ثبت نام";
+    ViewData["Title"] = "End of registration";
 }
 
 <div class="container">
     <nav aria-label="breadcrumb">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">آپ کد</a></li>
-            <li class="breadcrumb-item active" aria-current="page">پابان ثبت نام</li>
+            <li class="breadcrumb-item"><a href="/">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page">End of registration</li>
         </ul>
     </nav>
 </div>
@@ -16,15 +16,15 @@
 
 <main class="client-page">
     <div class="container-content">
-        <header><h2> پابان ثبت نام </h2></header>
+        <header><h2> End of registration </h2></header>
         <hr />
         <div class="alert alert-success">
-            <h3>@Model.UserName عزیز !</h3>
+            <h3>Hi Model.UserName .</h3>
             <p>
-                ثبت نام شما با موفقیت انجام شد , ایمیلی حاویه لینک فعال سازی به ایمیل @Model.Email ارسال شده .
+                Your registration is successful, an email with an activation link has been sent to @Model.Email.
             </p>
             <p>
-                جهت ادامه روند ثبت نام وارد ایمیل شده و اکانت خود را فعال نمایید !
+                To continue the registration process, enter your email and activate your account!
             </p>
         </div>
     </div>

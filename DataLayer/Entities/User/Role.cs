@@ -8,17 +8,17 @@ namespace DataLayer.Entities.User
         public int RoleId { get; set; }
 
 
-        [Display(Name = "عنوان نقش")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
-        [MaxLength(50, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Role title")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(50, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string RoleTitle { get; set; }
 
 
-        [Display(Name = "تاریخ ایجاد")]
+        [Display(Name = "Creation date")]
         public DateTime CreateDate { get; set; } = DateTime.Now;
 
 
-        [Display(Name = "حذف شده")]
+        [Display(Name = "Deleted")]
         public bool IsDelete { get; set; }
 
 
