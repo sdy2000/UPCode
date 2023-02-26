@@ -1,0 +1,93 @@
+﻿@model Core.DTOs.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lonin</li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main class="client-page">
+    <div class="container-content">
+
+        @if (ViewBag.EditProfile == true)
+        {
+            <div class="alert alert-warning">
+                <p class="help-block">Your email has been changed successfully, confirm the email entered to continue!</p>
+            </div>
+        }
+        @if (ViewBag.Login == 1)
+        {
+            <div class="alert alert-success">
+                <p class="help-block">Log in successfully!</p>
+            </div>
+            <script>
+                // Your delay in milliseconds
+                var delay = 3000;
+                setTimeout(function() { window.location = "/UserPanel"; }, delay);
+            </script>
+        }
+        else if (ViewBag.Login == 2)
+        {
+            <div class="alert alert-danger">
+                <p class="help-block">Your account is not active!</p>
+            </div>
+        }
+        else if (ViewBag.Login == 3)
+        {
+            <div class="alert alert-danger">
+                <p class="help-block">User with entered profile is not available!</p>
+            </div>
+        }
+
+        @if (ViewBag.ChengPassword == true)
+        {
+            <div class="alert alert-success">
+                <p>Your password was successfully changed</p>
+            </div>
+        }
+
+
+        <header><h2> Login </h2></header>
+
+        <div class="form-layer">
+
+            <form asp-action="Login" method="post">
+
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="email-address"><i class="zmdi zmdi-email"></i></span>
+                    <input asp-for="@Model.Email" type="email" class="form-control" placeholder="Email " aria-describedby="email-address">
+                </div>
+                <span asp-validation-for="@Model.Email" class="text-danger"></span>
+
+                <div class="input-group">
+                    <span class="input-group-addon" id="password"><i class="zmdi zmdi-lock"></i></span>
+                    <input asp-for="@Model.Password" type="password" class="form-control" placeholder="Password " aria-describedby="password">
+                </div>
+                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+
+                <div class="remember-me">
+                    <label><input type="checkbox" asp-for="RememberMe">  Remember me </label>
+                </div>
+
+                <div class="link">
+                    <a href="/ForgotPassword"> <i class="zmdi zmdi-lock"></i> I forgot my password!</a>
+                    <a href="/Register"> <i class="zmdi zmdi-account"></i> Sing up </a>
+                </div>
+
+                <button class="btn btn-success"> Log in </button>
+
+            </form>
+        </div>
+
+    </div>
+</main>

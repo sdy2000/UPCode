@@ -42,4 +42,22 @@ namespace Core.DTOs
         public bool IsSendActiovationEmail { get; set; }
         public bool IsSuccess { get; set; }
     }
+
+    public class LoginViewModel
+    {
+
+        [Display(Name = "Email")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        public string Email { get; set; }
+
+
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(20, ErrorMessage = "{0} cannot be greater than {1}!")]
+        public string Password { get; set; }
+
+
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; }
+    }
 }

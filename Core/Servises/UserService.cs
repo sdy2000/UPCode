@@ -37,7 +37,6 @@ namespace Core.Servises
         {
             return _context.Users.Any(u => u.UserName == userName);
         }
-
         public bool IsExistEmail(string email)
         {
             string Email = FixedText.FixedEmail(email);

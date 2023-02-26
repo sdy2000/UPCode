@@ -4,7 +4,10 @@ using Core.Generators;
 using Core.Security;
 using Core.Servises.Interfaces;
 using DataLayer.Entities.User;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Web.Controllers
 {
@@ -58,6 +61,18 @@ namespace Web.Controllers
 
 
             return View("_SuccessRegister", register);
+        }
+
+        #endregion
+
+        #region LOGIN
+
+        [Route("/Login")]
+        public IActionResult Login(bool EditProfile = false, bool ChengPassword = false)
+        {
+            ViewBag.EditProfile = EditProfile;
+            ViewBag.ChengPassword = ChengPassword;
+            return View();
         }
 
         #endregion
