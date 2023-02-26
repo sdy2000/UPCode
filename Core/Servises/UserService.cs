@@ -58,7 +58,7 @@ namespace Core.Servises
             return _context.Users.SingleOrDefault(u => u.UserName == userName);
         }
 
-        public User GetUsreByEmail(string email)
+        public User GetUserByEmail(string email)
         {
             string userEmail = FixedText.FixedEmail(email);
             return _context.Users.SingleOrDefault(u => u.Email == userEmail);
@@ -193,5 +193,29 @@ namespace Core.Servises
             return _context.Users.SingleOrDefault(u => u.Email == email && u.Password == hachPassword);
         }
 
+        public bool SendResetPasswordEmail(string email)
+        {
+            string fixedEmail = FixedText.FixedEmail(email);
+            User user = GetUserByEmail(fixedEmail);
+
+            #region SEND RESET PASSWORD EMAIL
+
+            if (user!=null)
+            {
+                try
+                {
+                    string body = EmailBodyGenerator.SendActiveEmail(user.UserName, user.ActiveCode);
+                    bool isSendEmail = SendEmail.Send(user.Email, "Reset Password", body);
+
+                    return isSendEmail;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+
+            #endregion
+        }
     }
 }

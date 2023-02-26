@@ -62,4 +62,12 @@ namespace Core.DTOs
     }
 
 
+    public class ForgotPasswordViewModel
+    {
+
+        [Display(Name = "ایمیل")]
+        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        public string Email { get; set; }
+    }
 }

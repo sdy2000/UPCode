@@ -9,7 +9,7 @@ namespace Core.Servises.Interfaces
         bool UpdateUser(User user);
         User GetUserByUserId(int userId);
         User GetUserByUserName(string userName);
-        User GetUsreByEmail(string email);
+        User GetUserByEmail(string email);
         User GetUserByActiveCode(string activeCode);
         bool IsExistUserName(string userName);
         bool IsExistEmail(string email);
@@ -21,7 +21,7 @@ namespace Core.Servises.Interfaces
         IsRegisterViewModel RegisterUser(RegisterViewModel register);
         bool ActiveAccount(string activeCode);
         User LoginUser(LoginViewModel login);
-
+        bool SendResetPasswordEmail(string email);
 
         #endregion
     }

@@ -148,6 +148,36 @@ namespace Web.Controllers
         #endregion
 
 
-        
+        #region FORGOT PASSWORD
+
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+        [Route("ForgotPassword")]
+        [HttpPost]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel forgot)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IsSuccess = false;
+                return View(forgot);
+            }
+            bool isEmailExist = _userService.IsExistEmail(forgot.Email);
+            if (isEmailExist == false)
+            {
+                ModelState.AddModelError("Email", "An account was not found with these specifications!");
+                return View(forgot);
+            }
+
+
+            ViewBag.IsSuccess = true;
+            return View();
+        }
+
+        #endregion
     }
 }
