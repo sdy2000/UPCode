@@ -185,6 +185,8 @@ namespace Core.Servises
             return isUpdate;
         }
 
+        // TODO : Fixed This Error :
+        //(Data is Null. This method or property cannot be called on Null values.)
         public User LoginUser(LoginViewModel login)
         {
             string hachPassword = PasswordHelper.EncodePasswordMd5(login.Password);
