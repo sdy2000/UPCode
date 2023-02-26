@@ -204,7 +204,7 @@ namespace Core.Servises
             {
                 try
                 {
-                    string body = EmailBodyGenerator.SendActiveEmail(user.UserName, user.ActiveCode);
+                    string body = EmailBodyGenerator.SendResetPaswordEmail(user.UserName, user.ActiveCode);
                     bool isSendEmail = SendEmail.Send(user.Email, "Reset Password", body);
 
                     return isSendEmail;
@@ -216,6 +216,8 @@ namespace Core.Servises
             }
 
             #endregion
+
+            return false;
         }
     }
 }
