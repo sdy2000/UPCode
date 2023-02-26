@@ -33,15 +33,53 @@ namespace Core.Servises
                 return false;
             }
         }
+
+        public bool UpdateUser(User user)
+        {
+            try
+            {
+                _context.Users.Update(user);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public User GetUserByUserId(int userId)
+        {
+            return _context.Users.Find(userId);
+        }
+
+        public User GetUserByUserName(string userName)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserName == userName);
+        }
+
+        public User GetUsreByEmail(string email)
+        {
+            string userEmail = FixedText.FixedEmail(email);
+            return _context.Users.SingleOrDefault(u => u.Email == userEmail);
+        }
+
+        public User GetUserByActiveCode(string activeCode)
+        {
+            return _context.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
+        }
+
         public bool IsExistUserName(string userName)
         {
             return _context.Users.Any(u => u.UserName == userName);
         }
+
         public bool IsExistEmail(string email)
         {
             string Email = FixedText.FixedEmail(email);
             return _context.Users.Any(u => u.Email == Email);
         }
+
         public bool SaveChange()
         {
             try
@@ -131,6 +169,22 @@ namespace Core.Servises
 
             return result;
         }
+
+        public bool ActiveAccount(string activeCode)
+        {
+            User user = GetUserByActiveCode(activeCode);
+            if (user == null || user.IsActive)
+                return false;
+
+            user.IsActive = true;
+            user.ActiveCode = NameGenerator.GeneratorUniqCode();
+
+            UpdateUser(user);
+            bool isUpdate = SaveChange();
+
+            return isUpdate;
+        }
+
         public User LoginUser(LoginViewModel login)
         {
             string hachPassword = PasswordHelper.EncodePasswordMd5(login.Password);
