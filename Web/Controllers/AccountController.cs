@@ -173,8 +173,9 @@ namespace Web.Controllers
                 return View(forgot);
             }
 
+            bool isSendPassEditEmail = _userService.SendResetPasswordEmail(forgot.Email);
 
-            ViewBag.IsSuccess = true;
+            ViewBag.IsSuccess = isSendPassEditEmail;
             return View();
         }
 
