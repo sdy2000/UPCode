@@ -75,6 +75,51 @@ namespace Web.Controllers
             return View();
         }
 
+
+        [Route("/Login")]
+        [HttpPost]
+        public IActionResult Login(LoginViewModel login)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Login = 3;
+                return View(login);
+            }
+
+            var user = _userService.LoginUser(login);
+            if (user != null)
+            {
+                if (user.IsActive)
+                {
+                    var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier,user.UserId.ToString()),
+                        new Claim(ClaimTypes.Name,user.UserName)
+                    };
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    var properties = new AuthenticationProperties
+                    {
+                        IsPersistent = login.RememberMe
+                    };
+                    HttpContext.SignInAsync(principal, properties);
+
+
+                    ViewBag.Login = 1;
+                    return View();
+                }
+                else
+                {
+                    ViewBag.Login = 2;
+                    return View(login);
+                }
+            }
+
+            ViewBag.Login = 3;
+            return View(login);
+        }
+
         #endregion
     }
 }

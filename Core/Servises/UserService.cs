@@ -131,6 +131,13 @@ namespace Core.Servises
 
             return result;
         }
+        public User LoginUser(LoginViewModel login)
+        {
+            string hachPassword = PasswordHelper.EncodePasswordMd5(login.Password);
+            string email = FixedText.FixedEmail(login.Email);
+
+            return _context.Users.SingleOrDefault(u => u.Email == email && u.Password == hachPassword);
+        }
 
     }
 }

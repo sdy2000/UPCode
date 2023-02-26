@@ -14,6 +14,7 @@ namespace Core.Servises.Interfaces
         #region ACCOUNT
 
         IsRegisterViewModel RegisterUser(RegisterViewModel register);
+        User LoginUser(LoginViewModel login);
 
         #endregion
     }
