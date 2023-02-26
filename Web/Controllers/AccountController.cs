@@ -121,5 +121,26 @@ namespace Web.Controllers
         }
 
         #endregion
+
+        #region LOGOUT
+
+        [Route("/Logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return Redirect("/Login");
+        }
+
+        #endregion
+
+        #region ACTIVE ACCOUNT
+
+        public IActionResult ActiveAccount(string id)
+        {
+            ViewBag.IsActive = _userService.ActiveAccount(id);
+            return View();
+        }
+
+        #endregion
     }
 }

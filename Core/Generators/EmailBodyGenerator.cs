@@ -9,7 +9,7 @@
                         <h2>UserName Hi !</h2>
                         <span>DateTime</span>
                         <p>Tanks for register in <a href=""#"">UPCode</a> , You must activate your account to continue .</p>
-                        <h3 style=""color:forestgreen;""><a href=""http://localhost:5074/success-activation/ActiveCode"">Account activation !</a></h3>
+                        <h3 style=""color:forestgreen;""><a href=""http://localhost:5074/account/activeaccount/ActiveCode"">Account activation !</a></h3>
                         </div>";
             body = body.Replace("UserName", userName);
             body = body.Replace("ActiveCode", activeCode);

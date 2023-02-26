@@ -20,7 +20,6 @@ namespace DataLayer.Entities.User
 
 
         [Display(Name = "Name")]
-        [Required(ErrorMessage = "Please enter {0}.")]
         [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? FirstName { get; set; }
 
