@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Core.Senders;
 
 namespace Web.Controllers
 {
@@ -64,6 +65,7 @@ namespace Web.Controllers
         }
 
         #endregion
+
 
         #region LOGIN
 
@@ -122,6 +124,7 @@ namespace Web.Controllers
 
         #endregion
 
+
         #region LOGOUT
 
         [Route("/Logout")]
@@ -133,6 +136,7 @@ namespace Web.Controllers
 
         #endregion
 
+
         #region ACTIVE ACCOUNT
 
         public IActionResult ActiveAccount(string id)
@@ -142,5 +146,8 @@ namespace Web.Controllers
         }
 
         #endregion
+
+
+        
     }
 }

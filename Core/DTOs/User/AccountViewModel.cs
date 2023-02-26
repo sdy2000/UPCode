@@ -60,4 +60,6 @@ namespace Core.DTOs
         [Display(Name = "Remember Me")]
         public bool RememberMe { get; set; }
     }
+
+
 }

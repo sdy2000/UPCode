@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Activate Account";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Activate Account</li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main class="client-page">
+    <div class="container-content">
+        <header><h2> Activate Account </h2></header>
+        <hr />
+        @if (ViewBag.IsActive)
+        {
+            <div class="alert alert-success">
+                <p>
+                    Your account was successfully activated
+                </p>
+                <p>
+                    <a href="/login">Login</a>
+                </p>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                <p>
+                    The account was not found with the submitted profile!
+                </p>
+            </div>
+        }
+    </div>
+</main>

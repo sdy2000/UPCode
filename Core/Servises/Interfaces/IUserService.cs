@@ -22,6 +22,7 @@ namespace Core.Servises.Interfaces
         bool ActiveAccount(string activeCode);
         User LoginUser(LoginViewModel login);
 
+
         #endregion
     }
 }
