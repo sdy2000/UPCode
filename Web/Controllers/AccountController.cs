@@ -180,5 +180,44 @@ namespace Web.Controllers
         }
 
         #endregion
+
+
+        #region RESETE PASSWORD
+
+        public IActionResult ResetPassword(string id)
+        {
+            return View(new ResetPasswordVeiwModel()
+            {
+                ActiveCode = id
+            });
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordVeiwModel reset)
+        {
+            #region VALIDATEION
+
+            if (!ModelState.IsValid || reset.Password != reset.RePassword)
+            {
+                ViewBag.IsSuccess = false;
+                return View(reset);
+            }
+            var isExistActiveCode = _userService.IsExistEmail(reset.ActiveCode);
+            if (isExistActiveCode == false)
+            {
+                ModelState.AddModelError("Password", "An account was not found with these specifications!");
+                return View(reset);
+            }
+
+            #endregion
+
+            bool isResetPassword = _userService.ResetPassword(reset.ActiveCode, reset.Password);
+
+            ViewBag.IsSuccess = isResetPassword;
+            return View();
+
+        }
+
+        #endregion
     }
 }

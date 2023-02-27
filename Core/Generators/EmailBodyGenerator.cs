@@ -28,7 +28,7 @@
                         <h2>Hi UserName</h2>
                         <i>DateTime</i>
                         <p> Click the link below to recover your password</p>
-                        <h3 style=""color:forestgreen;""><a href=""https://localhost:5074/account/ResetPassword/@Model.ActiveCode"">Password recovery!</a></h3>
+                        <h3 style=""color:forestgreen;""><a href=""https://localhost:5074/account/ResetPassword/ActiveCode"">Password recovery!</a></h3>
                     </div>";
             body = body.Replace("UserName", userName);
             body = body.Replace("ActiveCode", activeCode);

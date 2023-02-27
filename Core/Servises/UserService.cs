@@ -80,6 +80,11 @@ namespace Core.Servises
             return _context.Users.Any(u => u.Email == Email);
         }
 
+        public bool IsExistActiveCode(string activeCode)
+        {
+            return _context.Users.Any(u => u.ActiveCode == activeCode);
+        }
+
         public bool SaveChange()
         {
             try
@@ -218,6 +223,21 @@ namespace Core.Servises
             #endregion
 
             return false;
+        }
+
+        public bool ResetPassword(string activeCode, string password)
+        {
+            User user = GetUserByActiveCode(activeCode);
+
+
+            string hashPassword = PasswordHelper.EncodePasswordMd5(password);
+            user.Password = hashPassword;
+            user.ActiveCode = NameGenerator.GeneratorUniqCode();
+
+            UpdateUser(user);
+            bool isSaveChenge = SaveChange();
+
+            return isSaveChenge;            
         }
     }
 }

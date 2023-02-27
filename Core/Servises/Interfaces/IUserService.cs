@@ -13,6 +13,7 @@ namespace Core.Servises.Interfaces
         User GetUserByActiveCode(string activeCode);
         bool IsExistUserName(string userName);
         bool IsExistEmail(string email);
+        bool IsExistActiveCode(string activeCode);
         bool SaveChange();
 
 
@@ -22,6 +23,7 @@ namespace Core.Servises.Interfaces
         bool ActiveAccount(string activeCode);
         User LoginUser(LoginViewModel login);
         bool SendResetPasswordEmail(string email);
+        bool ResetPassword(string activeCode,string password);
 
         #endregion
     }
