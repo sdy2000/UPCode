@@ -181,7 +181,7 @@ namespace Web.Controllers
 
         #endregion
 
-
+        // Post Method Is Dont Work
         #region RESETE PASSWORD
 
         public IActionResult ResetPassword(string id)
