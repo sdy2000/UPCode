@@ -12,14 +12,14 @@ namespace Core.Senders
             try
             {
                 MimeMessage mail = new MimeMessage();
-                mail.From.Add(MailboxAddress.Parse("gmail@gmail.com"));
+                mail.From.Add(MailboxAddress.Parse("garfield.swaniawski@ethereal.email"));
                 mail.To.Add(MailboxAddress.Parse(To));
                 mail.Subject = Subject;
                 mail.Body = new TextPart(TextFormat.Html) { Text = Body };
 
                 using SmtpClient SmtpServer = new SmtpClient();
-                SmtpServer.Connect("smtp.gmail.com", 587,SecureSocketOptions.StartTls);
-                SmtpServer.Authenticate("gmail@gmail.com", "********");
+                SmtpServer.Connect("smtp.ethereal.email", 587, SecureSocketOptions.StartTls);
+                SmtpServer.Authenticate("garfield.swaniawski@ethereal.email", "3r7Apj1bs2dmAh3xzs");
                 SmtpServer.Send(mail);
                 SmtpServer.Disconnect(true);
 

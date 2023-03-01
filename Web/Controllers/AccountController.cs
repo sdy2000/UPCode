@@ -202,7 +202,7 @@ namespace Web.Controllers
                 ViewBag.IsSuccess = false;
                 return View(reset);
             }
-            var isExistActiveCode = _userService.IsExistEmail(reset.ActiveCode);
+            var isExistActiveCode = _userService.IsExistActiveCode(reset.ActiveCode);
             if (isExistActiveCode == false)
             {
                 ModelState.AddModelError("Password", "An account was not found with these specifications!");
