@@ -1,7 +1,50 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "UserPanel" + " " + User.Identity.Name;
 }
 
-<h2>Index</h2>
 
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> UserPanel </li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="_SidBar" />
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> Dashboard </h1></header>
+                        <div class="inner">
+                            <div class="account-information">
+                                <h3> User Info </h3>
+                                <ul>
+
+                                    <li> <i class="zmdi zmdi-account"></i> First name and Last name : sajad darvish </li>
+
+                                    <li> <i class="zmdi zmdi-assignment-account"></i> UserName :  sdy2000 </li>
+                                    <li> <i class="zmdi zmdi-email"></i> Email : sajad@gmail.com </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> Regiter Date : 2023/3/2 </li>
+
+                                    <li> <i class="zmdi zmdi-smartphone-android"></i> Phone Number : +9465456345 </li>
+
+                                    <li><i class="zmdi zmdi-account"></i>Gender : man  </li>
+
+                                    <li><i class="zmdi zmdi-money"></i>Wallet : 120 $ </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
