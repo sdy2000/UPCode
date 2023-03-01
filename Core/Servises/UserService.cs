@@ -256,12 +256,24 @@ namespace Core.Servises
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                RegisterDate = user.RegisterDate,
+                RegisterDate = user.RegisterDate.ToString("dd/MM/yyyy"),
                 PhonNumber = user.PhonNumber,
                 UesrGender = user.UserGender?.GenderTitle
             };
 
             return information;
+        }
+
+        public SideBarUserPanelViewModel GetSideBarUserPanelData(string userName)
+        {
+            return _context.Users
+                .Where(u => u.UserName == userName)
+                .Select(u => new SideBarUserPanelViewModel()
+                {
+                    UserName = u.UserName,
+                    RegisterDate = u.RegisterDate.ToString("dd/MM/yyyy"),
+                    UserAvatar = u.UserAvatar
+                }).Single();
         }
     }
 }

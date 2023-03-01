@@ -31,6 +31,7 @@ namespace Core.Servises.Interfaces
         #region USE PANEL
 
         InformationUserViewModel GetUserInformation(string userName);
+        SideBarUserPanelViewModel GetSideBarUserPanelData(string userName);
 
         #endregion
     }
