@@ -144,12 +144,12 @@ namespace Core.Servises
                 UserAvatar = "No-Photo.jpg"
             };
 
-            bool addUser =  AddUser(user);
+            bool addUser = AddUser(user);
 
 
             #region SEND ACTIVATION EMAIL
 
-            if(addUser)
+            if (addUser)
             {
                 try
                 {
@@ -205,7 +205,7 @@ namespace Core.Servises
 
             #region SEND RESET PASSWORD EMAIL
 
-            if (user!=null)
+            if (user != null)
             {
                 try
                 {
@@ -237,7 +237,31 @@ namespace Core.Servises
             UpdateUser(user);
             bool isSaveChenge = SaveChange();
 
-            return isSaveChenge;            
+            return isSaveChenge;
+        }
+
+
+        // // // // // // // // // UserPanel
+
+
+        public InformationUserViewModel GetUserInformation(string userName)
+        {
+            User user = _context.Users.Where(u => u.UserName == userName)
+                .Include(u => u.UserGender)
+                .SingleOrDefault();
+
+            InformationUserViewModel information = new InformationUserViewModel()
+            {
+                UserName = userName,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                RegisterDate = user.RegisterDate,
+                PhonNumber = user.PhonNumber,
+                UesrGender = user.UserGender?.GenderTitle
+            };
+
+            return information;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Core.DTOs.InformationUserViewModel
+
+@{
     ViewData["Title"] = "UserPanel" + " " + User.Identity.Name;
 }
 
@@ -27,17 +29,21 @@
                             <div class="account-information">
                                 <h3> User Info </h3>
                                 <ul>
-
-                                    <li> <i class="zmdi zmdi-account"></i> First name and Last name : sajad darvish </li>
-
-                                    <li> <i class="zmdi zmdi-assignment-account"></i> UserName :  sdy2000 </li>
-                                    <li> <i class="zmdi zmdi-email"></i> Email : sajad@gmail.com </li>
-                                    <li> <i class="zmdi zmdi-calendar-check"></i> Regiter Date : 2023/3/2 </li>
-
-                                    <li> <i class="zmdi zmdi-smartphone-android"></i> Phone Number : +9465456345 </li>
-
-                                    <li><i class="zmdi zmdi-account"></i>Gender : man  </li>
-
+                                    @if (!string.IsNullOrEmpty(Model.FirstName) && !string.IsNullOrEmpty(Model.LastName))
+                                    {
+                                        <li> <i class="zmdi zmdi-account"></i> First name and Last name : @(Model.FirstName + " " + Model.LastName) </li>
+                                    }
+                                    <li> <i class="zmdi zmdi-assignment-account"></i> UserName :  @Model.UserName </li>
+                                    <li> <i class="zmdi zmdi-email"></i> Email : @Model.Email </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> Regiter Date : @Model.RegisterDate.ToString() </li>
+                                    @if (!string.IsNullOrEmpty(Model.PhonNumber))
+                                    {
+                                        <li> <i class="zmdi zmdi-smartphone-android"></i> Phone Number : @Model.PhonNumber </li>
+                                    }
+                                    @if (Model.UesrGender != null)
+                                    {
+                                        <li><i class="zmdi zmdi-account"></i>Gender : @Model.UesrGender  </li>
+                                    }
                                     <li><i class="zmdi zmdi-money"></i>Wallet : 120 $ </li>
                                 </ul>
                             </div>

@@ -26,5 +26,12 @@ namespace Core.Servises.Interfaces
         bool ResetPassword(string activeCode,string password);
 
         #endregion
+
+
+        #region USE PANEL
+
+        InformationUserViewModel GetUserInformation(string userName);
+
+        #endregion
     }
 }
