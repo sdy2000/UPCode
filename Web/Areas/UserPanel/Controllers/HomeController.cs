@@ -31,7 +31,7 @@ namespace Web.Areas.UserPanel.Controllers
         [Route("UserPanel/EditProfile")]
         public IActionResult EditProfile()
         {
-
+            // TODO : Send value to veiw
             return View();
         }
 
