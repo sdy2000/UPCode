@@ -1,6 +1,11 @@
-﻿using Core.Servises.Interfaces;
+﻿using Core.Convertors;
+using Core.Senders;
+using Core.Servises.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Web.Areas.UserPanel.Controllers
 {
@@ -20,5 +25,17 @@ namespace Web.Areas.UserPanel.Controllers
         {
             return View(_userService.GetUserInformation(User.Identity.Name));
         }
+
+        #region EDIT PROFILE
+
+        [Route("UserPanel/EditProfile")]
+        public IActionResult EditProfile()
+        {
+
+            return View();
+        }
+
+
+        #endregion
     }
 }

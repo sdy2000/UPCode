@@ -1,0 +1,127 @@
+﻿@model Core.DTOs.EditProfileViewModel
+@{
+    ViewData["Title"] = "Edit-Profile" + " " + User.Identity.Name;
+}
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Edit Profile </li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="_SidBar" />
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> EditProfile </h1></header>
+                        <div class="inner form-layer">
+                            <form action="EditProfile" method="post" enctype="multipart/form-data">
+
+                                <input type="hidden" asp-for="UserAvatar" />
+
+
+                                <div class="row">
+
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                        <img src="/UserAvatar/thumb/@Model.UserAvatar" class="thumbnail imgUser" id="imgUser"
+                                             alt="@Model.UserAvatar" title="User Image">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-image"></i></span>
+                                            <input type="file" id="imgUserUp" asp-for="UserImage" class="form-control">
+                                        </div>
+                                        <span asp-validation-for="@Model.UserImage" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" asp-for="FirstName" class="form-control" placeholder="نام " aria-describedby="username">
+                                        </div>
+                                        <span asp-validation-for="@Model.FirstName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-5 col-sm-5 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-account"></i></span>
+                                            <input type="text" asp-for="LastName" class="form-control" placeholder=" نام خانوادگی" aria-describedby="username">
+                                        </div>
+                                        <span asp-validation-for="@Model.LastName" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-phone"></i></span>
+                                            <input type="number" asp-for="PhonNumber" class="form-control" placeholder=" شماره موبایل" aria-describedby="username">
+                                        </div>
+                                        <span asp-validation-for="@Model.PhonNumber" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="zmdi zmdi-email"></i></span>
+                                            <input type="email" asp-for="Email" class="form-control" placeholder=" ایمیل" aria-describedby="username">
+                                        </div>
+                                        <p class="help-block">در صورت تغیر ایمیل ایمیل فعال سازی به ایمیل جدید ارسال خواهد شد !</p>
+                                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="radio-layer">
+                                            <div class="form-group">
+                                                <label>جنسیت : </label>
+                                                <select class="form-control" asp-for="GenderId" asp-items="@(ViewData["Genders"] as SelectList)">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <span asp-validation-for="@Model.GenderId" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="link">
+                                            <a href="/UserPanel/EditPassword"> <i class="zmdi zmdi-lock"></i> تغیر کلمه عبور </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success "> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts
+    {
+    <script>
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgUser').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgUserUp").change(function () {
+            readURL(this);
+        });
+    </script>
+}
