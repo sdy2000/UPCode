@@ -6,6 +6,7 @@ using Core.Senders;
 using Core.Servises.Interfaces;
 using DataLayer.Context;
 using DataLayer.Entities.User;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Servises
@@ -274,6 +275,32 @@ namespace Core.Servises
                     RegisterDate = u.RegisterDate.ToString("dd/MM/yyyy"),
                     UserAvatar = u.UserAvatar
                 }).Single();
+        }
+       
+        public EditProfileViewModel GetDataForEditProfileUser(string userName)
+        {
+            return _context.Users
+               .Where(u => u.UserName == userName)
+               .Select(u => new EditProfileViewModel()
+               {
+                   Email = u.Email,
+                   FirstName = u.FirstName,
+                   LastName = u.LastName,
+                   UserAvatar = u.UserAvatar,
+                   PhonNumber = u.PhonNumber,
+                   GenderId=u.GenderId
+               }).Single();
+        }
+
+        public List<SelectListItem> GetGenderForEditUser()
+        {
+            return _context.UserGenders
+                .Select(g => new SelectListItem()
+                {
+                    Text = g.GenderTitle,
+                    Value = g.GenderId.ToString()
+                })
+                .ToList();
         }
     }
 }

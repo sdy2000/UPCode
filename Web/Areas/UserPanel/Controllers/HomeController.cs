@@ -31,7 +31,17 @@ namespace Web.Areas.UserPanel.Controllers
         [Route("UserPanel/EditProfile")]
         public IActionResult EditProfile()
         {
-            // TODO : Send value to veiw
+            var user = _userService.GetDataForEditProfileUser(User.Identity.Name);
+
+            if (user == null)
+                return BadRequest();
+
+            List<SelectListItem> genders = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text="انتخاب کنید",Value="0"}
+            }; genders.AddRange(_userService.GetGenderForEditUser());
+            ViewData["Genders"] = new SelectList(genders, "Value", "Text", user.GenderId);
+
             return View();
         }
 

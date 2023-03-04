@@ -1,5 +1,6 @@
 ﻿using Core.DTOs;
 using DataLayer.Entities.User;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Core.Servises.Interfaces
 {
@@ -32,7 +33,8 @@ namespace Core.Servises.Interfaces
 
         InformationUserViewModel GetUserInformation(string userName);
         SideBarUserPanelViewModel GetSideBarUserPanelData(string userName);
-
+        EditProfileViewModel GetDataForEditProfileUser(string userName);
+        List<SelectListItem> GetGenderForEditUser();
         #endregion
     }
 }
