@@ -1,5 +1,6 @@
 ﻿using Core.DTOs;
 using DataLayer.Entities.User;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Core.Servises.Interfaces
@@ -15,6 +16,8 @@ namespace Core.Servises.Interfaces
         bool IsExistUserName(string userName);
         bool IsExistEmail(string email);
         bool IsExistActiveCode(string activeCode);
+        string imgPath(string folderName, string imgName);
+        string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg");
         bool SaveChange();
 
 
