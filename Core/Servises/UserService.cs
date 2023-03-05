@@ -302,5 +302,10 @@ namespace Core.Servises
                 })
                 .ToList();
         }
+
+        public EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile,int userId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

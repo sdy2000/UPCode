@@ -53,4 +53,11 @@ namespace Core.DTOs
 
         public IFormFile? UserImage { get; set; }
     }
+
+    public class EditProfileInfoViewModel
+    {
+        public bool IsEditProfile { get; set; }
+        public bool IsSendActiveEmail { get; set; }
+        public bool IsSuccess { get; set; }
+    }
 }
