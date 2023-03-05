@@ -1,8 +1,4 @@
-﻿using Core.Convertors;
-using Core.Senders;
-using Core.Servises.Interfaces;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+﻿using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -38,7 +34,7 @@ namespace Web.Areas.UserPanel.Controllers
 
             List<SelectListItem> genders = new List<SelectListItem>()
             {
-                new SelectListItem(){Text="انتخاب کنید",Value="0"}
+                new SelectListItem(){Text="Select Gender",Value="0"}
             }; genders.AddRange(_userService.GetGenderForEditUser());
             ViewData["Genders"] = new SelectList(genders, "Value", "Text", user.GenderId);
 
