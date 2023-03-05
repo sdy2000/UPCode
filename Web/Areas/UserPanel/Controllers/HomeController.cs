@@ -64,7 +64,11 @@ namespace Web.Areas.UserPanel.Controllers
                 return View(editProfile);
             }
 
+            return Redirect("/Login?EditProfile=true");
 
+
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            _userService.EditProfile(editProfile, User.Identity.Name);
 
             return Redirect("/UserPanel");
         }

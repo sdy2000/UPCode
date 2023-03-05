@@ -35,7 +35,7 @@ namespace Core.Servises.Interfaces
         SideBarUserPanelViewModel GetSideBarUserPanelData(string userName);
         EditProfileViewModel GetDataForEditProfileUser(string userName);
         List<SelectListItem> GetGenderForEditUser();
-        EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile,int userId);
+        EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile,string userName);
         #endregion
     }
 }

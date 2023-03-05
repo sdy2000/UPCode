@@ -8,6 +8,7 @@ using DataLayer.Context;
 using DataLayer.Entities.User;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Servises
 {
@@ -303,9 +304,53 @@ namespace Core.Servises
                 .ToList();
         }
 
-        public EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile,int userId)
+        public EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile, string userName)
         {
-            throw new NotImplementedException();
+            EditProfileInfoViewModel result = new EditProfileInfoViewModel();
+            User user = GetUserByUserName(userName);
+
+            user.FirstName = editProfile.FirstName;
+            user.LastName = editProfile.LastName;
+            user.PhonNumber = editProfile.PhonNumber;
+            user.GenderId = editProfile.GenderId;
+            //user.UserAvatar = SaveOrUpDateImg(editProfile.UserImage, editProfile.UserAvatar);
+
+            string newEmial = FixedText.FixedEmail(editProfile.Email);
+            if (user.Email != newEmial)
+            {
+                if (IsExistEmail(newEmial))
+                {
+                    result.IsEmailExist = true;
+                    result.IsSuccess = false;
+
+                    return result;
+                }
+
+                // TODO : _RESETEMAIL DONT WORK
+                #region SEND ACTIVATION EMAIL
+
+                try
+                {
+                user.IsActive = false;
+
+                }
+                catch
+                {
+                    result.IsSendActiveEmail = false;
+                    result.IsSuccess = false;
+
+                    return
+
+                }
+
+                #endregion
+
+            }
+
+
+
+
+            UpdateUser(user);
         }
     }
 }

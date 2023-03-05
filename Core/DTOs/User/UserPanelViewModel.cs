@@ -57,6 +57,7 @@ namespace Core.DTOs
     public class EditProfileInfoViewModel
     {
         public bool IsEditProfile { get; set; }
+        public bool IsEmailExist { get; set; }
         public bool IsSendActiveEmail { get; set; }
         public bool IsSuccess { get; set; }
     }
