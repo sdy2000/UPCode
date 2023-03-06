@@ -6,9 +6,9 @@ using Core.Senders;
 using Core.Servises.Interfaces;
 using DataLayer.Context;
 using DataLayer.Entities.User;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Core.Servises
 {
@@ -85,6 +85,83 @@ namespace Core.Servises
         public bool IsExistActiveCode(string activeCode)
         {
             return _context.Users.Any(u => u.ActiveCode == activeCode);
+        }
+
+        public string imgPath(string folderName, string imgName)
+        {
+            string path = Path.Combine(
+                 Directory.GetCurrentDirectory(),
+                 "wwwroot/UserAvatar/" + folderName,
+                 imgName);
+
+            return path;
+        }
+
+        public string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg")
+        {
+
+
+            if (img != null && img.IsImage() && !FileValidator.CheckIfExiclFile(img))
+            {
+
+                string normalPath = imgPath("NormalSize", imgName);
+                string thumbPath = imgPath("ThumbSize", imgName);
+                string iconPath = imgPath("IconSize", imgName);
+
+                if (imgName != "No-Photo.jpg")
+                {
+                    if (File.Exists(normalPath))
+                        File.Delete(normalPath);
+
+                    if (File.Exists(thumbPath))
+                        File.Delete(thumbPath);
+
+                    if (File.Exists(iconPath))
+                        File.Delete(iconPath);
+                }
+
+                imgName = new string
+                (Path.GetFileNameWithoutExtension(img.FileName).Take(10).ToArray()).Replace(' ', '-') + "-" +
+                NameGenerator.GeneratorUniqCode() + "-" +
+                DateTime.Now.ToString("yyyymmssfff") + Path.GetExtension(img.FileName);
+
+                normalPath = imgPath("NormalSize", imgName);
+                thumbPath = imgPath("ThumbSize", imgName);
+                iconPath = imgPath("IconSize", imgName);
+
+                using (var stream = new FileStream(normalPath, FileMode.Create))
+                {
+                    img.CopyToAsync(stream);
+                }
+
+
+                #region RESIZE IMAGE TO THUMB
+
+                ImageConvertor imgResizeThumb = new ImageConvertor();
+
+                imgResizeThumb.Image_resize(normalPath, thumbPath, 150);
+
+                #endregion
+
+                #region RESIZE IMAGE TO ICON
+
+                ImageConvertor imgResize = new ImageConvertor();
+
+                imgResize.Image_resize(normalPath, iconPath, 56);
+
+                #endregion
+
+
+                return imgName;
+            }
+            else if (imgName != "No-Photo.jpg")
+            {
+                return imgName;
+            }
+            else
+            {
+                return "No-Photo.jpg";
+            }
         }
 
         public bool SaveChange()
@@ -277,7 +354,7 @@ namespace Core.Servises
                     UserAvatar = u.UserAvatar
                 }).Single();
         }
-       
+
         public EditProfileViewModel GetDataForEditProfileUser(string userName)
         {
             return _context.Users
@@ -289,7 +366,7 @@ namespace Core.Servises
                    LastName = u.LastName,
                    UserAvatar = u.UserAvatar,
                    PhonNumber = u.PhonNumber,
-                   GenderId=u.GenderId
+                   GenderId = u.GenderId
                }).Single();
         }
 
@@ -312,8 +389,8 @@ namespace Core.Servises
             user.FirstName = editProfile.FirstName;
             user.LastName = editProfile.LastName;
             user.PhonNumber = editProfile.PhonNumber;
-            user.GenderId = editProfile.GenderId;
-            //user.UserAvatar = SaveOrUpDateImg(editProfile.UserImage, editProfile.UserAvatar);
+            user.GenderId = (editProfile.GenderId != 0 && editProfile.GenderId >= 3) ? editProfile.GenderId : null;
+            user.UserAvatar = SaveOrUpDateImg(editProfile.UserImage, editProfile.UserAvatar);
 
             string newEmial = FixedText.FixedEmail(editProfile.Email);
             if (user.Email != newEmial)
@@ -326,31 +403,31 @@ namespace Core.Servises
                     return result;
                 }
 
-                // TODO : _RESETEMAIL DONT WORK
                 #region SEND ACTIVATION EMAIL
 
                 try
                 {
-                user.IsActive = false;
-
+                    string body = EmailBodyGenerator.SendActiveEmail(user.UserName, user.ActiveCode);
+                    result.IsSendActiveEmail = SendEmail.Send(newEmial, "Active Email", body);
+                    user.IsActive = false;
+                    user.Email = newEmial;
                 }
                 catch
                 {
                     result.IsSendActiveEmail = false;
                     result.IsSuccess = false;
 
-                    return
-
+                    return result;
                 }
 
                 #endregion
 
             }
 
-
-
-
             UpdateUser(user);
+            result.IsSuccess = SaveChange();
+
+            return result;
         }
     }
 }

@@ -25,4 +25,9 @@
     <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\UserAvatar\IconSize\" />
+    <Folder Include="wwwroot\UserAvatar\ThumbSize\" />
+  </ItemGroup>
+
 </Project>

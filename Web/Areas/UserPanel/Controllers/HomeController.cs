@@ -34,7 +34,7 @@ namespace Web.Areas.UserPanel.Controllers
         {
             EditProfileViewModel userInfo = _userService.GetDataForEditProfileUser(User.Identity.Name);
 
-            if (user == null)
+            if (userInfo == null)
                 return BadRequest();
 
             List<SelectListItem> genders = new List<SelectListItem>()
@@ -43,7 +43,7 @@ namespace Web.Areas.UserPanel.Controllers
             }; genders.AddRange(_userService.GetGenderForEditUser());
             ViewData["Genders"] = new SelectList(genders, "Value", "Text", userInfo.GenderId);
 
-            return View();
+            return View(userInfo);
         }
 
 
@@ -51,24 +51,36 @@ namespace Web.Areas.UserPanel.Controllers
         [HttpPost]
         public IActionResult EditProfile(EditProfileViewModel editProfile)
         {
+            EditProfileInfoViewModel editInfo = _userService.EditProfile(editProfile, User.Identity.Name);
             EditProfileViewModel userInfo = _userService.GetDataForEditProfileUser(User.Identity.Name);
 
-            if (!ModelState.IsValid)
+
+            if (!editInfo.IsSuccess || !ModelState.IsValid || string.IsNullOrEmpty(editProfile.Email))
             {
+
+                if (editInfo.IsEmailExist)
+                    ModelState.AddModelError("Email", "The entered email is available !");
+                else if (editInfo.IsSendActiveEmail)
+                    ModelState.AddModelError("Email", "Error sending activation email !");
+                else
+                    ModelState.AddModelError("Email", "Error Edit Profil");
 
                 List<SelectListItem> genders = new List<SelectListItem>()
                     {
-                        new SelectListItem(){Text="انتخاب کنید",Value="0"}
+                        new SelectListItem(){Text="Select Gender",Value="0"}
                     }; genders.AddRange(_userService.GetGenderForEditUser());
                 ViewData["Genders"] = new SelectList(genders, "Value", "Text", userInfo.GenderId);
                 return View(editProfile);
             }
 
-            return Redirect("/Login?EditProfile=true");
+
+            if (editInfo.IsSendActiveEmail && editInfo.IsSuccess)
+            {
+                HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return Redirect("/Login?EditProfile=true");
+            }
 
 
-            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            _userService.EditProfile(editProfile, User.Identity.Name);
 
             return Redirect("/UserPanel");
         }
