@@ -430,6 +430,11 @@ namespace Core.Servises
             return result;
         }
 
+        public bool CompareOldPassword(string oldPassword, string userName)
+        {
+            string newPas = PasswordHelper.EncodePasswordMd5(oldPassword);
+            return _context.Users.Any(u => u.UserName == userName && u.Password == newPas);
+        }
 
         public bool ChengPassword(string newPas, string userName)
         {

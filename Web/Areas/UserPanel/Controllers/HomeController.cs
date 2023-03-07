@@ -102,7 +102,11 @@ namespace Web.Areas.UserPanel.Controllers
             {
                 return View(chengPas);
             }
-           
+            if (!_userService.CompareOldPassword(chengPas.OldPassword, User.Identity.Name))
+            {
+                ModelState.AddModelError("OldPassword", "Enter Current Password Not Correct !");
+                return View(chengPas);
+            }
             ViewBag.ChengPassword = _userService.ChengPassword(chengPas.Password, User.Identity.Name);
             //LOG OUT USEAR
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
