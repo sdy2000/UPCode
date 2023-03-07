@@ -1,6 +1,4 @@
-﻿using Core.Convertors;
-using Core.DTOs;
-using Core.Senders;
+﻿using Core.DTOs;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
