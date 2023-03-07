@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Core.DTOs;
+@using Core.Servises.Interfaces;
+@inject IUserService _userSerivce
+
+@{
+    SideBarUserPanelViewModel user = _userSerivce.GetSideBarUserPanelData(User.Identity.Name) as SideBarUserPanelViewModel;
+}
+
+<!DOCTYPE html>
 <html class="no-js" dir="ltr" lang="en-us">
 <head>
     <meta charset="UTF-8">
@@ -33,18 +41,25 @@
                         <div class="clientarea">
                             @if (User.Identity.IsAuthenticated)
                             {
-                            <div class="loggein">
-                                    <i class="zmdi zmdi-account"></i><a href="/UserPanel"> @User.Identity.Name </a>/
+                                <div class="loggein">
+                                    <a href="/UserPanel">
+                                        <img style="border-radius:100%;border:1px solid white;margin-right:4px;padding:2px;"
+                                         src="/UserAvatar/NormalSize/@user.UserAvatar"
+                                         title="User Image"
+                                         width="40px"
+                                         height="40px" />
+                                        @User.Identity.Name
+                                    </a>/
                                     <a href="/Logout"> Logout </a>
-                            </div>
+                                </div>
                             }
                             else
                             {
-                            <div class="signin">
-                                <i class="zmdi zmdi-account"></i>
-                                <a href="/Login"> Login </a> /
-                                <a href="/Register"> Sing up </a>
-                            </div>
+                                <div class="signin">
+                                    <i class="zmdi zmdi-account"></i>
+                                    <a href="/Login"> Login </a> /
+                                    <a href="/Register"> Sing up </a>
+                                </div>
                             }
                         </div>
                     </div>

@@ -131,7 +131,7 @@ namespace Core.Servises
 
                 using (var stream = new FileStream(normalPath, FileMode.Create))
                 {
-                    img.CopyToAsync(stream);
+                    img.CopyTo(stream);
                 }
 
 
@@ -389,7 +389,7 @@ namespace Core.Servises
             user.FirstName = editProfile.FirstName;
             user.LastName = editProfile.LastName;
             user.PhonNumber = editProfile.PhonNumber;
-            user.GenderId = (editProfile.GenderId != 0 && editProfile.GenderId >= 3) ? editProfile.GenderId : null;
+            user.GenderId = (editProfile.GenderId != 0 && editProfile.GenderId <= 3) ? editProfile.GenderId : null;
             user.UserAvatar = SaveOrUpDateImg(editProfile.UserImage, editProfile.UserAvatar);
 
             string newEmial = FixedText.FixedEmail(editProfile.Email);
