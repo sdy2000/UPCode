@@ -39,6 +39,8 @@ namespace Core.Servises.Interfaces
         EditProfileViewModel GetDataForEditProfileUser(string userName);
         List<SelectListItem> GetGenderForEditUser();
         EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile,string userName);
+        bool CompareOldPassword(string oldPassword, string userName);
+        bool ChengPassword(string newPas, string userName);
         #endregion
     }
 }
