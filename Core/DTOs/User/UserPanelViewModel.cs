@@ -23,31 +23,31 @@ namespace Core.DTOs
 
     public class EditProfileViewModel
     {
-        [Display(Name = "ایمیل")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Email")]
+        [MaxLength(200, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? Email { get; set; }
 
-        [Display(Name = "نام")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "First Name")]
+        [MaxLength(70, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? FirstName { get; set; }
 
 
-        [Display(Name = "نام خانوادگی")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Last Name")]
+        [MaxLength(70, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? LastName { get; set; }
 
 
-        [Display(Name = "شماره موبایل")]
-        [MaxLength(200, ErrorMessage = "{0} نمیتواند بیشتر از {1} باشد!")]
+        [Display(Name = "Phone Number")]
+        [MaxLength(15, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string? PhonNumber { get; set; }
 
 
 
-        [Display(Name = "جنسیت")]
+        [Display(Name = "Gender")]
         public int? GenderId { get; set; }
 
-        [Display(Name = "تصویر")]
-        [Required(ErrorMessage = "لطفا {0} را وارد نمایید.")]
+        [Display(Name = "User Avatar")]
+        [Required(ErrorMessage = "Please enter {0}.")]
         public string UserAvatar { get; set; }
 
 
@@ -60,5 +60,26 @@ namespace Core.DTOs
         public bool IsEmailExist { get; set; }
         public bool IsSendActiveEmail { get; set; }
         public bool IsSuccess { get; set; }
+    }
+
+    public class ChengePassword
+    {
+        [Display(Name = "Current Password")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        public string OldPassword { get; set; }
+
+
+
+        [Display(Name = "Password")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        [MaxLength(20, ErrorMessage = "{0} cannot be greater than {1}!")]
+        [MinLength(6, ErrorMessage = "{0} cannot be less than {1}!")]
+        public string Password { get; set; }
+
+
+        [Compare("Password", ErrorMessage = "Passwords are inconsistent!")]
+        [Display(Name = "RePassword")]
+        [Required(ErrorMessage = "Please enter {0}.")]
+        public string RePassword { get; set; }
     }
 }

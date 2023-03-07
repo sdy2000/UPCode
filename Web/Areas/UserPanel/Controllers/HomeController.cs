@@ -86,5 +86,16 @@ namespace Web.Areas.UserPanel.Controllers
         }
 
         #endregion
+
+        #region EDIT PASSWORD
+
+        [Route("UserPanel/EditPassword")]
+        public IActionResult EditPassword()
+        {
+
+            return View();
+        }
+
+        #endregion
     }
 }
