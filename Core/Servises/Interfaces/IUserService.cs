@@ -47,6 +47,7 @@ namespace Core.Servises.Interfaces
         #region WALLET
 
         int BalanceUserWallet(string userName);
+        List<WalletViewModel> GetWalletUser(string userName);
 
         #endregion
     }

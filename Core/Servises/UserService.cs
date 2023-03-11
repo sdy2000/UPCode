@@ -476,5 +476,21 @@ namespace Core.Servises
 
             return (enter.Sum() - exit.Sum());
         }
+        public List<WalletViewModel> GetWalletUser(string userName)
+        {
+            int userId = GetUserIdByUserName(userName);
+
+            return _context.Wallets
+                .Where(w => w.UserId == userId)
+                .Select(w => new WalletViewModel()
+                {
+                    Amount = w.Amount,
+                    IsPay = w.IsPay,
+                    Type = w.TypeId,
+                    DateTime = w.CreateDate,
+                    Description = w.Description
+                })
+                .ToList();
+        }
     }
 }

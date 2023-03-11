@@ -18,6 +18,7 @@ namespace Web.Areas.UserPanel.Controllers
         [Route("UserPanel/Wallet")]
         public IActionResult Index()
         {
+            ViewBag.ListWallet = _userService.GetWalletUser(User.Identity.Name);
             return View();
         }
     }
