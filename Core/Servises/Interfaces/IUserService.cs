@@ -49,6 +49,7 @@ namespace Core.Servises.Interfaces
 
         int AddWallet(Wallet wallet);
         bool UpdateWallet(Wallet wallet);
+        Wallet GetWalletByWalletId(int walletId);
         int BalanceUserWallet(string userName);
         List<WalletViewModel> GetWalletUser(string userName);
         int ChargeWallet(string userName, int amount, string description, bool isPay = false);

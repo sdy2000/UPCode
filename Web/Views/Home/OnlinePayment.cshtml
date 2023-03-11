@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Payment Result";
+}
+
+
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Payment Result </li>
+        </ul>
+    </nav>
+</div>
+
+
+
+
+<main class="client-page">
+    <div class="container-content">
+
+        <header><h2> Payment Result </h2></header>
+        <hr />
+        <div class="form-layer">
+
+            @if (ViewBag.IsSuccess == true)
+            {
+                <div class="alert alert-success">
+                    <h2>Payment was successful !</h2>
+                    <p>Tracking Code : @ViewBag.Code </p>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <h2>Payment failed!</h2>
+                </div>
+            }
+            <br />
+            <a href="/UserPanel" class="btn btn-block btn-success">Return to user panel </a>
+        </div>
+    </div>
+</main>

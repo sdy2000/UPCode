@@ -466,7 +466,7 @@ namespace Core.Servises
             try
             {
                 _context.Wallets.Add(wallet);
-
+                SaveChange();
                 return wallet.WalletId;
             }
             catch
@@ -487,6 +487,12 @@ namespace Core.Servises
                 return false;
             }
         }
+
+        public Wallet GetWalletByWalletId(int walletId)
+        {
+            return _context.Wallets.Find(walletId);
+        }
+
         public int BalanceUserWallet(string userName)
         {
             var userId = GetUserIdByUserName(userName);

@@ -38,7 +38,7 @@ namespace Web.Areas.UserPanel.Controllers
             #region ONLINE PAYMENT
 
             var payment = new ZarinpalSandbox.Payment(charge.Amount);
-            var res = payment.PaymentRequest("Charge Wallet", "https://localhost:5074/OnlinePayment/" + walletId);
+            var res = payment.PaymentRequest("Charge Wallet", "http://localhost:5074//OnlinePayment/" + walletId, "sajjad.darvish.yektayi@gmail.com", "09370776595");
             if (res.Result.Status == 100)
             {
                 return Redirect("https://sandbox.zarinpal.com/pg/StartPay/" + res.Result.Authority);
