@@ -13,6 +13,7 @@ namespace Core.Servises.Interfaces
         User GetUserByUserName(string userName);
         User GetUserByEmail(string email);
         User GetUserByActiveCode(string activeCode);
+        int GetUserIdByUserName(string userName);
         bool IsExistUserName(string userName);
         bool IsExistEmail(string email);
         bool IsExistActiveCode(string activeCode);
@@ -41,6 +42,12 @@ namespace Core.Servises.Interfaces
         EditProfileInfoViewModel EditProfile(EditProfileViewModel editProfile,string userName);
         bool CompareOldPassword(string oldPassword, string userName);
         bool ChengPassword(string newPas, string userName);
+        #endregion
+
+        #region WALLET
+
+        int BalanceUserWallet(string userName);
+
         #endregion
     }
 }

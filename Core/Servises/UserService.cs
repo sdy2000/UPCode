@@ -71,6 +71,13 @@ namespace Core.Servises
             return _context.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
         }
 
+        public int GetUserIdByUserName(string userName)
+        {
+            return _context.Users
+                .SingleOrDefault(u => u.UserName == userName)
+                .UserId;
+        }
+
         public bool IsExistUserName(string userName)
         {
             return _context.Users.Any(u => u.UserName == userName);
@@ -337,7 +344,8 @@ namespace Core.Servises
                 LastName = user.LastName,
                 RegisterDate = user.RegisterDate.ToString("dd/MM/yyyy"),
                 PhonNumber = user.PhonNumber,
-                UesrGender = user.UserGender?.GenderTitle
+                UesrGender = user.UserGender?.GenderTitle,
+                Wallet = BalanceUserWallet(userName)
             };
 
             return information;
@@ -447,6 +455,26 @@ namespace Core.Servises
                 return SaveChange();
 
             return false;
+        }
+
+
+        // // // // // // // // // // // WALLET   
+
+        public int BalanceUserWallet(string userName)
+        {
+            var userId = GetUserIdByUserName(userName);
+
+            var enter = _context.Wallets
+                .Where(w => w.UserId == userId && w.TypeId == 1 && w.IsPay == true)
+                .Select(w => w.Amount)
+                .ToList();
+
+            var exit = _context.Wallets
+                .Where(w => w.UserId == userId && w.TypeId == 2 && w.IsPay == true)
+                .Select(w => w.Amount)
+                .ToList();
+
+            return (enter.Sum() - exit.Sum());
         }
     }
 }

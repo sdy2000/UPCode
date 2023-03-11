@@ -12,6 +12,7 @@ namespace Core.DTOs
         public string? UesrGender { get; set; }
         public string RegisterDate { get; set; }
         public string PhonNumber { get; set; }
+        public int Wallet { get; set; }
     }
 
     public class SideBarUserPanelViewModel
