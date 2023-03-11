@@ -96,18 +96,18 @@ namespace Web.Areas.UserPanel.Controllers
 
         [Route("UserPanel/EditPassword")]
         [HttpPost]
-        public IActionResult EditPassword(ChengePassword chengPas)
+        public IActionResult EditPassword(ChengePassword chengPass)
         {
             if (!ModelState.IsValid)
             {
-                return View(chengPas);
+                return View(chengPass);
             }
-            if (!_userService.CompareOldPassword(chengPas.OldPassword, User.Identity.Name))
+            if (!_userService.CompareOldPassword(chengPass.OldPassword, User.Identity.Name))
             {
                 ModelState.AddModelError("OldPassword", "Enter Current Password Not Correct !");
-                return View(chengPas);
+                return View(chengPass);
             }
-            ViewBag.ChengPassword = _userService.ChengPassword(chengPas.Password, User.Identity.Name);
+            ViewBag.ChengPassword = _userService.ChengPassword(chengPass.Password, User.Identity.Name);
             //LOG OUT USEAR
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 

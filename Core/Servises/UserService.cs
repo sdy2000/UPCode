@@ -352,7 +352,7 @@ namespace Core.Servises
                     UserName = u.UserName,
                     RegisterDate = u.RegisterDate.ToString("dd/MM/yyyy"),
                     UserAvatar = u.UserAvatar
-                }).Single();
+                }).SingleOrDefault();
         }
 
         public EditProfileViewModel GetDataForEditProfileUser(string userName)
@@ -443,7 +443,10 @@ namespace Core.Servises
 
             user.Password = hashpas;
 
-            return UpdateUser(user);
+            if (UpdateUser(user))
+                return SaveChange();
+
+            return false;
         }
     }
 }
