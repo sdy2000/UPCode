@@ -1,7 +1,121 @@
-﻿
+﻿@using Core.DTOs
+@model Core.DTOs.ChargeWalletViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "User Wallet" + " " + User.Identity.Name;
 }
 
-<h2>Index</h2>
 
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">UPCode</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> Wallet </li>
+        </ul>
+    </nav>
+</div>
+
+
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <partial name="_SidBar" />
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> Wallet </h1></header>
+                        <div class="inner">
+                            <div class="account-information">
+                                <h3> Recharge wallet </h3>
+                                <form asp-action="Index" method="post">
+
+
+                                    <div class="row">
+
+
+                                        <div class="col-md-7 col-sm-8 col-xs-11">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="zmdi  zmdi-money"></i></span>
+                                                <input type="number" asp-for="Amount" class="form-control" aria-describedby="username">
+                                            </div>
+                                            <span asp-validation-for="Amount" class="text-danger"></span>
+                                        </div>
+
+
+
+                                        <div class="col-md-7 col-sm-8 col-xs-12">
+                                            <button class="btn btn-success "> Recharge wallet </button>
+                                        </div>
+
+                                    </div>
+
+
+                                </form>
+                                <hr />
+                                <hr />
+                                @{
+                                    List<WalletViewModel> list = ViewBag.ListWallet as List<WalletViewModel>;
+                                }
+
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+                                            <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example"
+                                                   aria-describedby="dataTables-example_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th>Amount</th>
+                                                        <th>Transaction Type</th>
+                                                        <th>Completed</th>
+                                                        <th>Date Time</th>
+                                                        <th>Description</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in list)
+                                                    {
+                                                        <tr class="gradeA odd">
+                                                            <td>@item.Amount.ToString("#,0")</td>
+                                                            <td>
+                                                                @if (@item.Type == 1)
+                                                                {
+                                                                    <p class="text-success">واریز به حساب</p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p class="text-danger">برداشت از حساب</p>
+                                                                }
+                                                            </td>
+                                                            <td>
+                                                                @if (@item.IsPay)
+                                                                {
+                                                                    <i class="zmdi zmdi-check-circle text-success"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i class="zmdi zmdi-close-circle text-danger"></i>
+                                                                }
+                                                            </td>
+                                                            <td>@item.DateTime</td>
+                                                            <td>@item.Description</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <!-- /.table-responsive -->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
