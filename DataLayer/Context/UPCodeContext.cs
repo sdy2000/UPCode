@@ -1,4 +1,5 @@
-﻿using DataLayer.Entities.User;
+﻿using Datalayer.Entities.Wallets;
+using DataLayer.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,12 @@ namespace DataLayer.Context
 
         #endregion
 
+        #region WALLET
 
+        public DbSet<Wallet> Wallets { get; set; }
+        public DbSet<WalletType> WalletTypes { get; set; }
+
+        #endregion
 
 
 
