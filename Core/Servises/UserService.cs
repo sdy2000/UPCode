@@ -4,6 +4,7 @@ using Core.Generators;
 using Core.Security;
 using Core.Senders;
 using Core.Servises.Interfaces;
+using Datalayer.Entities.Wallets;
 using DataLayer.Context;
 using DataLayer.Entities.User;
 using Microsoft.AspNetCore.Http;
@@ -460,6 +461,32 @@ namespace Core.Servises
 
         // // // // // // // // // // // WALLET   
 
+        public int AddWallet(Wallet wallet)
+        {
+            try
+            {
+                _context.Wallets.Add(wallet);
+
+                return wallet.WalletId;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public bool UpdateWallet(Wallet wallet)
+        {
+            try
+            {
+                _context.Wallets.Update(wallet);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public int BalanceUserWallet(string userName)
         {
             var userId = GetUserIdByUserName(userName);
@@ -476,6 +503,7 @@ namespace Core.Servises
 
             return (enter.Sum() - exit.Sum());
         }
+
         public List<WalletViewModel> GetWalletUser(string userName)
         {
             int userId = GetUserIdByUserName(userName);
@@ -491,6 +519,25 @@ namespace Core.Servises
                     Description = w.Description
                 })
                 .ToList();
+        }
+
+        public int ChargeWallet(string userName, int amount, string description, bool isPay = false)
+        {
+            var wallet = new Wallet()
+            {
+                UserId = GetUserIdByUserName(userName),
+                TypeId = 1,
+                Amount = amount,
+                Description = description,
+                IsPay = isPay,
+                CreateDate = DateTime.Now
+            };
+
+            int walletId = AddWallet(wallet);
+            if (walletId != 0)
+                SaveChange();
+
+            return walletId;
         }
     }
 }

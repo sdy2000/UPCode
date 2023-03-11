@@ -1,4 +1,5 @@
-﻿using Core.Servises.Interfaces;
+﻿using Core.DTOs;
+using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,23 @@ namespace Web.Areas.UserPanel.Controllers
         [Route("UserPanel/Wallet")]
         public IActionResult Index()
         {
+            ViewBag.ListWallet = _userService.GetWalletUser(User.Identity.Name);
+            return View();
+        }
+
+
+        [Route("UserPanel/Wallet")]
+        [HttpPost]
+        public IActionResult Index(ChargeWalletViewModel charge)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ListWallet = _userService.GetWalletUser(User.Identity.Name);
+                return View();
+            }
+            int walletId = _userService.ChargeWallet(User.Identity.Name, charge.Amount, "Charge account");
+
+
             ViewBag.ListWallet = _userService.GetWalletUser(User.Identity.Name);
             return View();
         }
