@@ -1,3 +1,4 @@
+using Core.DTOs.User;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -13,8 +14,13 @@ namespace Web.Pages.Admin.User
             _userService = userService;
         }
 
-        public void OnGet()
+        [BindProperty]
+        public UserForAdminViewModel UserForAdminViewModel { get; set; }
+        public void OnGet(int pageId = 1, string userNameFilter = "", string emailFilter = "",
+            int genderId = 0, int take = 10)
         {
+            ViewData["pageId"] = pageId;
+            UserForAdminViewModel = _userService.GetUserForAdmin(pageId, userNameFilter, emailFilter, genderId, take);
         }
     }
 }
