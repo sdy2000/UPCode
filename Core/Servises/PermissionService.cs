@@ -15,6 +15,20 @@ namespace Core.Servises
 
 
 
+        public bool SaveChenge()
+        {
+            try
+            {
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public List<Role> GetAllRoles(string roleNameFilter = "")
         {
             IQueryable<Role> result = _context.Roles;
@@ -25,6 +39,20 @@ namespace Core.Servises
             }
 
             return result.ToList();
+        }
+
+        public void AddRolesToUser(List<int> roleIds, int userId)
+        {
+            foreach (int role in roleIds)
+            {
+                _context.UserRoles.Add(new UserRole()
+                {
+                    RoleId = role,
+                    UserId = userId
+                });
+            }
+
+            SaveChenge();
         }
     }
 }

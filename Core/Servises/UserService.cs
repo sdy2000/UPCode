@@ -581,5 +581,33 @@ namespace Core.Servises
 
             return list;
         }
+
+
+        public int AddUserFromAdmin(CreateUserForAdminViewModel user)
+        {
+            User addUser = new User();
+            addUser.UserName = user.UserName;
+            addUser.Email = FixedText.FixedEmail(user.Email);
+            addUser.Password = PasswordHelper.EncodePasswordMd5(user.Password);
+            addUser.FirstName = user.FirstName;
+            addUser.LastName = user.LastName;
+            addUser.PhonNumber = user.PhonNumber;
+            addUser.ActiveCode = NameGenerator.GeneratorUniqCode();
+            addUser.IsActive = (user.IsActive == 1) ? true : false;
+            addUser.GenderId = (user.GenderId != 0 && user.GenderId <= 3) ? user.GenderId : null;
+            addUser.UserAvatar = SaveOrUpDateImg(user.UserAvatar);
+
+
+            if (AddUser(addUser))
+                SaveChange();
+
+
+            if (user.AddWallet != 0)
+            {
+                ChargeWallet(user.UserName, user.AddWallet.Value, "Charging wallet by admin", true);
+            }
+
+            return addUser.UserId;
+        }
     }
 }
