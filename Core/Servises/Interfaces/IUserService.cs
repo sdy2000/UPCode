@@ -1,4 +1,5 @@
 ﻿using Core.DTOs;
+using Core.DTOs.User;
 using Datalayer.Entities.Wallets;
 using DataLayer.Entities.User;
 using Microsoft.AspNetCore.Http;
@@ -33,7 +34,6 @@ namespace Core.Servises.Interfaces
 
         #endregion
 
-
         #region USE PANEL
 
         InformationUserViewModel GetUserInformation(string userName);
@@ -53,6 +53,14 @@ namespace Core.Servises.Interfaces
         int BalanceUserWallet(string userName);
         List<WalletViewModel> GetWalletUser(string userName);
         int ChargeWallet(string userName, int amount, string description, bool isPay = false);
+
+        #endregion
+
+        #region ADMIN PANEL
+
+        UserForAdminViewModel GetUserForAdmin(int pageId = 1, string userNameFilter = "",
+            string emailFilter = "", int genderId = 0, int take = 10);
+
 
         #endregion
     }

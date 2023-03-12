@@ -1,5 +1,6 @@
 ﻿using Core.Convertors;
 using Core.DTOs;
+using Core.DTOs.User;
 using Core.Generators;
 using Core.Security;
 using Core.Senders;
@@ -544,6 +545,41 @@ namespace Core.Servises
                 SaveChange();
 
             return walletId;
+        }
+
+
+        // // // // // // // // // // //   USER PANEL   
+
+
+        public UserForAdminViewModel GetUserForAdmin(int pageId = 1, string userNameFilter = "",
+            string emailFilter = "", int genderId = 0, int take = 10)
+        {
+            IQueryable<User> result = _context.Users
+                .Include(u => u.UserGender);
+
+            if (!string.IsNullOrEmpty(userNameFilter))
+            {
+                result = result.Where(u => u.UserName.Contains(userNameFilter));
+            }
+            if (!string.IsNullOrEmpty(emailFilter))
+            {
+                result = result.Where(u => u.Email.Contains(FixedText.FixedEmail(emailFilter)));
+            }
+            if (genderId != 0)
+            {
+                result = result.Where(u => u.GenderId == genderId);
+            }
+
+            // SHOW ITEM IN PAGE
+            int skip = (pageId - 1) * take;
+
+            UserForAdminViewModel list = new UserForAdminViewModel();
+            list.CurrentPage = pageId;
+            list.PageCount = result.Count() / take;
+            list.UserCount = result.Count();
+            list.Users = result.ToList();
+
+            return list;
         }
     }
 }

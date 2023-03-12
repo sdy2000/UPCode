@@ -39,6 +39,8 @@ namespace DataLayer.Context
         {
 
 
+            modelBuilder.Entity<User>()
+                .HasQueryFilter(u => !u.IsDelete);
 
 
 
