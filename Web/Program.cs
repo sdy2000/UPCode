@@ -34,6 +34,7 @@ builder.Services.AddDbContext<UPCodeContext>(options =>
 #region IoC
 
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IPermissionService, PermissionService>();
 
 #endregion
 
