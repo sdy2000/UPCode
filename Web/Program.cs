@@ -38,6 +38,7 @@ builder.Services.AddTransient<IUserService, UserService>();
 #endregion
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -49,6 +50,9 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
+
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "areas",
