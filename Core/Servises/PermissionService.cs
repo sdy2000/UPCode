@@ -54,5 +54,15 @@ namespace Core.Servises
 
             SaveChenge();
         }
+        public void EditUserRoles(List<int> roleIds, int userId)
+        {
+            _context.UserRoles
+                .Where(r => r.UserId == userId)
+                .ToList()
+                .ForEach(r => _context.UserRoles.Remove(r));
+
+
+            AddRolesToUser(roleIds, userId);
+        }
     }
 }

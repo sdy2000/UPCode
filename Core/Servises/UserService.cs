@@ -581,7 +581,6 @@ namespace Core.Servises
             return list;
         }
 
-
         public int AddUserFromAdmin(CreateUserForAdminViewModel user)
         {
             User addUser = new User();
@@ -599,6 +598,8 @@ namespace Core.Servises
 
             if (AddUser(addUser))
                 SaveChange();
+            else
+                return 0;
 
 
             if (user.AddWallet != 0)
@@ -608,7 +609,6 @@ namespace Core.Servises
 
             return addUser.UserId;
         }
-
 
         public EditUserForAdminViewModel GetUserForEditInAdmin(int userId)
         {
@@ -630,6 +630,37 @@ namespace Core.Servises
 
                  })
                  .Single();
+        }
+
+        public int UpdateUserFromAdmin(EditUserForAdminViewModel user)
+        {
+            User updateUser = GetUserByUserId(user.UserId);
+            updateUser.UserName = user.UserName;
+            updateUser.Email = FixedText.FixedEmail(user.Email);
+            updateUser.FirstName = user.FirstName;
+            updateUser.LastName = user.LastName;
+            updateUser.PhonNumber = user.PhonNumber;
+            updateUser.IsActive = (user.IsActive == 1) ? true : false;
+            updateUser.GenderId = (user.GenderId != 0 && user.GenderId <= 3) ? user.GenderId : null;
+            updateUser.UserAvatar = SaveOrUpDateImg(user.NewUserAvatar, user.UserAvatar);
+            if (user.Password != null)
+            {
+                updateUser.Password = PasswordHelper.EncodePasswordMd5(user.Password);
+            }
+
+
+            if (UpdateUser(updateUser))
+                SaveChange();
+            else
+                return 0;
+
+
+            if (user.AddWallet != 0)
+            {
+                ChargeWallet(user.UserName, user.AddWallet.Value, "Charging wallet by admin", true);
+            }
+
+            return updateUser.UserId;
         }
     }
 }

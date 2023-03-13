@@ -85,10 +85,9 @@ namespace Core.DTOs
 
 
         [Display(Name = "Password")]
-        [Required(ErrorMessage = "Please enter {0}.")]
         [MaxLength(20, ErrorMessage = "{0} cannot be greater than {1}!")]
         [MinLength(6, ErrorMessage = "{0} cannot be less than {1}!")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
 
         [Display(Name = "First Name")]
