@@ -61,7 +61,7 @@ namespace Core.Servises.Interfaces
         UserForAdminViewModel GetUserForAdmin(int pageId = 1, string userNameFilter = "",
             string emailFilter = "", int genderId = 0, int take = 10);
         int AddUserFromAdmin(CreateUserForAdminViewModel user);
-
+        EditUserForAdminViewModel GetUserForEditInAdmin(int userId);
 
         #endregion
     }

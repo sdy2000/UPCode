@@ -609,5 +609,28 @@ namespace Core.Servises
 
             return addUser.UserId;
         }
+
+
+        public EditUserForAdminViewModel GetUserForEditInAdmin(int userId)
+        {
+            return _context.Users
+                 .Where(u => u.UserId == userId)
+                 .Include(r => r.UserRoles)
+                 .Select(u => new EditUserForAdminViewModel()
+                 {
+                     UserId = u.UserId,
+                     UserName = u.UserName,
+                     Email = u.Email,
+                     FirstName = u.FirstName,
+                     LastName = u.LastName,
+                     PhonNumber = u.PhonNumber,
+                     IsActive = (u.IsActive) ? 1 : 2,
+                     GenderId = u.GenderId,
+                     UserAvatar = u.UserAvatar,
+                     UserRoles = u.UserRoles.Select(r => r.RoleId).ToList()
+
+                 })
+                 .Single();
+        }
     }
 }
