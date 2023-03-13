@@ -1,5 +1,5 @@
 using Core.Convertors;
-using Core.DTOs.User;
+using Core.DTOs;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

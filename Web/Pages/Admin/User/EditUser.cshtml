@@ -1,4 +1,196 @@
-﻿@page
+﻿@page "{id}"
+@using DataLayer.Entities.User;
 @model Web.Pages.Admin.User.EditUserModel
 @{
+    ViewData["Title"] = "Edit User";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Edit User</h1>
+    </div>
+</div>
+@if (ViewData["IsSuccess"] != null)
+{
+    <div class="alert alert-danger">
+        <p class="help-block">The operation failed</p>
+    </div>
+}
+<form method="post" enctype="multipart/form-data" dir="ltr">
+
+    <input type="hidden" asp-for="EditUser.UserId" />
+    <input type="hidden" asp-for="EditUser.UserAvatar" />
+
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    User Information
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+
+                    <div class="form-group col-md-8">
+                        <label>UserName :</label>
+                        <input type="text" asp-for="EditUser.UserName" class="form-control">
+                        <span asp-validation-for="EditUser.UserName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label>Email :</label>
+                        <input type="email" asp-for="EditUser.Email" class="form-control">
+                        <span asp-validation-for="EditUser.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label>Password :</label>
+                        <input type="text" asp-for="EditUser.Password" class="form-control">
+                        <span asp-validation-for="EditUser.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>First Name  :</label>
+                        <input type="text" asp-for="EditUser.FirstName" class="form-control">
+                        <span asp-validation-for="EditUser.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Last Name :</label>
+                        <input type="text" asp-for="EditUser.LastName" class="form-control">
+                        <span asp-validation-for="EditUser.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label>Phone Number :</label>
+                        <input type="number" asp-for="EditUser.PhonNumber" class="form-control">
+                        <span asp-validation-for="EditUser.PhonNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label>Condition :</label>
+                        <select asp-for="EditUser.IsActive" class="form-control">
+                            <option value="2">Choose  Condition</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                            <option value="3">Activation by email</option>
+                        </select>
+                        <span asp-validation-for="EditUser.IsActive" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label>Gender :</label>
+                        <select asp-for="EditUser.GenderId" class="form-control">
+                            <option value="0">Choose Gender</option>
+                            <option value="1">Man</option>
+                            <option value="2">Woman</option>
+                            <option value="3">Transgender</option>
+                        </select>
+                        <span asp-validation-for="EditUser.GenderId" class="text-danger"></span>
+                    </div>
+
+
+                    <div class="form-group col-md-8">
+                        <label>User Wallet :</label>
+                        <input type="number" asp-for="EditUser.AddWallet" class="form-control" value="0">
+                        <span asp-validation-for="EditUser.AddWallet" class="text-danger"></span>
+                        <p class="help-block">*If you enter the amount of the user's wallet, it will be charged!</p>
+                        <br />
+                    </div>
+
+
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            User Avatar
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <div class="form-group">
+                                <img src="/UserAvatar/NormalSize/@Model.EditUser.UserAvatar" class="thumbnail" id="imgUser"
+                                     alt="User Imag" title="User Image" style="max-width:100%;" />
+                            </div>
+                            <div class="form-group">
+                                <label>Choose Picture :</label>
+                                <input asp-for="EditUser.UserAvatar" type="file">
+                                <span asp-validation-for="EditUser.UserAvatar" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+
+
+                @{
+                    List<Role> roles = ViewData["Roles"] as List<Role>;
+                }
+
+
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            User Roles
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            <div class="form-group">
+                                @foreach (var role in roles)
+                                {
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" @((Model.EditUser.UserRoles.Any(u=>u==role.RoleId))?"checked":"")
+                                               name="SelectedRoles" value="@role.RoleId">@role.RoleTitle
+                                        </label>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-1">
+            <input type="submit" class="btn btn-success" value="Edit User" />
+        </div>
+    </div>
+</form>
+
+
+@section Scripts{
+    <script>
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgUser').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#EditUser_NewUserAvatar").change(function () {
+            readURL(this);
+        });
+    </script>
 }

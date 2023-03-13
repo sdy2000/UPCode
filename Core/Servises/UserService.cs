@@ -1,6 +1,5 @@
 ﻿using Core.Convertors;
 using Core.DTOs;
-using Core.DTOs.User;
 using Core.Generators;
 using Core.Security;
 using Core.Senders;

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace Core.DTOs.User
+namespace Core.DTOs
 {
     public class UserForAdminViewModel
     {

@@ -1,5 +1,4 @@
 ﻿using Core.DTOs;
-using Core.DTOs.User;
 using Datalayer.Entities.Wallets;
 using DataLayer.Entities.User;
 using Microsoft.AspNetCore.Http;
