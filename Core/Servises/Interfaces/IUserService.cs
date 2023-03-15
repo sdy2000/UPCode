@@ -63,6 +63,7 @@ namespace Core.Servises.Interfaces
         EditUserForAdminViewModel GetUserForEditInAdmin(int userId);
         int UpdateUserFromAdmin(EditUserForAdminViewModel user);
         DeleteUserForAdminViewModel GetUserForDelete(int userId);
+        bool DeleteUser(int userId);
 
         #endregion
     }

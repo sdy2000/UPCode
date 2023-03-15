@@ -23,5 +23,18 @@ namespace Web.Pages.Admin.User
             ViewData["Roles"] = _permissionService.GetAllRoles();
             DeleteUser = _userService.GetUserForDelete(id);
         }
+
+        public IActionResult OnPost()
+        {
+            bool isDeleteUser = _userService.DeleteUser(DeleteUser.UserId);
+
+            if (!isDeleteUser)
+            {
+                ViewData["IsSuccess"] = isDeleteUser;
+                return Page();
+            }
+
+            return Redirect("/Admin/User");
+        }
     }
 }

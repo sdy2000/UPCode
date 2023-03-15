@@ -685,5 +685,18 @@ namespace Core.Servises
                  })
                  .Single();
         }
+
+        public bool DeleteUser(int userId)
+        {
+            var user = GetUserByUserId(userId);
+
+            user.IsDelete = true;
+            user.IsActive = false;
+
+            if (UpdateUser(user))
+                return SaveChange();
+
+            return false;
+        }
     }
 }
