@@ -1,5 +1,6 @@
 ﻿using Core.Servises.Interfaces;
 using DataLayer.Context;
+using DataLayer.Entities.Permissions;
 using DataLayer.Entities.User;
 
 namespace Core.Servises
@@ -63,6 +64,16 @@ namespace Core.Servises
 
 
             AddRolesToUser(roleIds, userId);
+        }
+
+
+
+        // // // // // // // // // // // PERMISSION
+
+
+        public List<Permission> GetAllPermissions()
+        {
+            return _context.Permissions.ToList();
         }
     }
 }
