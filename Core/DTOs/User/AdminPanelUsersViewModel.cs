@@ -122,4 +122,28 @@ namespace Core.DTOs
         public int? AddWallet { get; set; }
 
     }
+
+    public class DeleteUserForAdminViewModel
+    {
+        public int UserId { get; set; }
+
+        public string Gender { get; set; }
+
+        public string UserName { get; set; }
+
+        public string Email { get; set; }
+
+        public string? FirstName { get; set; }
+
+        public string? LastName { get; set; }
+
+        public string? PhonNumber { get; set; }
+
+        public List<int>? UserRoles { get; set; }
+
+        public string UserAvatar { get; set; }
+
+        public DateTime RegisterDate { get; set; }
+
+    }
 }

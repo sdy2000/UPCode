@@ -662,5 +662,28 @@ namespace Core.Servises
 
             return updateUser.UserId;
         }
+
+        public DeleteUserForAdminViewModel GetUserForDelete(int userId)
+        {
+            return _context.Users
+                 .Where(u => u.UserId == userId)
+                 .Include(r => r.UserRoles)
+                 .Include(g => g.UserGender)
+                 .Select(u => new DeleteUserForAdminViewModel()
+                 {
+                     UserId = u.UserId,
+                     UserName = u.UserName,
+                     Email = u.Email,
+                     FirstName = u.FirstName,
+                     LastName = u.LastName,
+                     PhonNumber = u.PhonNumber,
+                     Gender = u.UserGender.GenderTitle,
+                     UserAvatar = u.UserAvatar,
+                     UserRoles = u.UserRoles.Select(r => r.RoleId).ToList(),
+                     RegisterDate = u.RegisterDate
+
+                 })
+                 .Single();
+        }
     }
 }
