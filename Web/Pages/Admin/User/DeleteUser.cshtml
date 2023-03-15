@@ -1,4 +1,112 @@
-﻿@page
+﻿@page "{id}"
+@using DataLayer.Entities.User;
 @model Web.Pages.Admin.User.DeleteUserModel
 @{
+    ViewData["Title"] = "Delete User";
+    List<Role> roles = ViewData["Roles"] as List<Role>;
 }
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Delete User</h1>
+    </div>
+</div>
+
+<div class="row" dir="ltr">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                User Information
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <dl class="dl-horizontal">
+                    <dt>User Name :</dt>
+                    <dd>@Model.DeleteUser.UserName</dd>
+                    <br />
+
+                    <dt>Email :</dt>
+                    <dd>@Model.DeleteUser.Email</dd>
+                    <br />
+
+                    @if (Model.DeleteUser.FirstName != null)
+                    {
+                        <dt>First Name :</dt>
+                        <dd>@Model.DeleteUser.FirstName</dd>
+                        <br />
+                    }
+
+                    @if (Model.DeleteUser.LastName != null)
+                    {
+                        <dt>Last Name :</dt>
+                        <dd>@Model.DeleteUser.LastName</dd>
+                        <br />
+                    }
+
+
+                    @if (Model.DeleteUser.PhonNumber != null)
+                    {
+                        <dt>Phon Number:</dt>
+                        <dd>@Model.DeleteUser.PhonNumber</dd>
+                        <br />
+                    }
+
+                    @if (Model.DeleteUser.Gender != null)
+                    {
+                        <dt>Gender :</dt>
+                        <dd>@Model.DeleteUser.Gender</dd>
+                        <br />
+                    }
+                    <dt>Register Date :</dt>
+                    <dd>@Model.DeleteUser.RegisterDate.ToString("MMM/dd/yyyy")</dd>
+                    <br />
+
+                    @if (Model.DeleteUser.UserRoles != null)
+                    {
+                        <dt>User Roles:</dt>
+                        <dd>
+                            @foreach (var item in Model.DeleteUser.UserRoles)
+                            {
+                                @foreach (var role in roles)
+                                {
+                                    if (item == role.RoleId)
+                                    {
+                                        @role.RoleTitle
+                                    }
+                                }
+                                <i> - </i>
+                            }
+                        </dd>
+                        <br />
+                    }
+                    <br />
+                    <dt></dt>
+                    <dd>
+                        <form method="post">
+                            <input type="hidden" asp-for="DeleteUser.UserId" />
+
+                            <input type="submit" class="btn btn-danger" value="Delete User" />
+                        </form>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                User Avatar
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <div class="form-group">
+                    <img src="/UserAvatar/NormalSize/@Model.DeleteUser.UserAvatar" class="thumbnail" id="imgUser"
+                         alt="User Imag" title="User Image" style="width:100%;" />
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+    </div>
+</div>
