@@ -1,4 +1,5 @@
 ﻿using Datalayer.Entities.Wallets;
+using DataLayer.Entities.Permissions;
 using DataLayer.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,6 +33,14 @@ namespace DataLayer.Context
         public DbSet<WalletType> WalletTypes { get; set; }
 
         #endregion
+
+        #region PERMISSION
+
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<RolePermission> RolePermissions { get; set; }
+
+        #endregion
+
 
 
 

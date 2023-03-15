@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Datalayer.Entities.Wallets;
 
 namespace DataLayer.Entities.User
 {
@@ -70,17 +71,12 @@ namespace DataLayer.Entities.User
 
 
 
-
-
-
-
-
-
         #region RELATIONS
 
         [ForeignKey("GenderId")]
         public UserGender UserGender { get; set; }
         public List<UserRole> UserRoles { get; set; }
+        public List<Wallet> Wallets { get; set; }
 
         #endregion
 
