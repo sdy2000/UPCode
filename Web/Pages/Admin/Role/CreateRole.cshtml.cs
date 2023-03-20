@@ -18,5 +18,28 @@ namespace Web.Pages.Admin.Role
         {
             ViewData["Permissions"] = _permission.GetAllPermissions();
         }
+
+        public IActionResult OnPost(List<int> SelectedPermission)
+        {
+            if (string.IsNullOrEmpty(Role.RoleTitle))
+            {
+                ViewData["Permissions"] = _permission.GetAllPermissions();
+                ModelState.AddModelError("Role.RoleTitle", "Role title is required !");
+                return Page();
+            }
+            if (_permission.IsExistRole(Role.RoleTitle))
+            {
+                ViewData["Permissions"] = _permission.GetAllPermissions();
+                ModelState.AddModelError("Role.RoleTitle", "Role Title is repeated !");
+                return Page();
+            }
+
+            int roleId = _permission.AddRole(Role);
+
+            // ADD ROLE PERMISSION
+            _permission.AddPermissionToRole(SelectedPermission, roleId);
+
+            return Redirect("/Admin/Role");
+        }
     }
 }

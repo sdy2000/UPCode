@@ -15,8 +15,25 @@ namespace Core.Servises
         }
 
 
+        public int AddRole(Role role)
+        {
+            Role newRole = new Role()
+            {
+                RoleTitle = role.RoleTitle,
+                IsDelete = false
+            };
+            _context.Roles.Add(newRole);
+            SaveChange();
 
-        public bool SaveChenge()
+            return newRole.RoleId;
+        }
+        
+        public bool IsExistRole(string roleTitle)
+        {
+            return _context.Roles.Any(r => r.RoleTitle == roleTitle);
+        }
+
+        public bool SaveChange()
         {
             try
             {
@@ -53,8 +70,9 @@ namespace Core.Servises
                 });
             }
 
-            SaveChenge();
+            SaveChange();
         }
+
         public void EditUserRoles(List<int> roleIds, int userId)
         {
             _context.UserRoles
@@ -74,6 +92,20 @@ namespace Core.Servises
         public List<Permission> GetAllPermissions()
         {
             return _context.Permissions.ToList();
+        }
+
+        public void AddPermissionToRole(List<int> permissionIds, int RoleId)
+        {
+            foreach (int per in permissionIds)
+            {
+                _context.RolePermissions.Add(new RolePermission()
+                {
+                    PermissionId = per,
+                    RoleId = RoleId
+                });
+            }
+
+            SaveChange();
         }
     }
 }
