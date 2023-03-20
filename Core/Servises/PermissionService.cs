@@ -59,6 +59,11 @@ namespace Core.Servises
             return result.ToList();
         }
 
+        public Role GetRoleById(int roleId)
+        {
+            return _context.Roles.Find(roleId);
+        }
+
         public void AddRolesToUser(List<int> roleIds, int userId)
         {
             foreach (int role in roleIds)
@@ -92,6 +97,14 @@ namespace Core.Servises
         public List<Permission> GetAllPermissions()
         {
             return _context.Permissions.ToList();
+        }
+
+        public List<int> GetPermissionRole(int roleId)
+        {
+            return _context.RolePermissions
+                .Where(up => up.RoleId == roleId)
+                .Select(up => up.PermissionId)
+                .ToList();
         }
 
         public void AddPermissionToRole(List<int> permissionIds, int RoleId)
