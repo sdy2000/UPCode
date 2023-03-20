@@ -12,6 +12,7 @@ namespace Core.Servises.Interfaces
         #region ROLE
 
         int AddRole(Role role);
+        void UpdateRole(Role role);
         bool IsExistRole(string roleTitle);
         List<Role> GetAllRoles(string roleNameFilter = "");
         Role GetRoleById(int roleId);
@@ -25,6 +26,7 @@ namespace Core.Servises.Interfaces
         List<Permission> GetAllPermissions();
         List<int> GetPermissionRole(int roleId);
         void AddPermissionToRole(List<int> permissionIds, int RoleId);
+        void EditPermissionToRole(List<int> permissionIds, int RoleId);
 
         #endregion
     }

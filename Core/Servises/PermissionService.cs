@@ -15,6 +15,37 @@ namespace Core.Servises
         }
 
 
+
+        public bool SaveChange()
+        {
+            try
+            {
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        // // // // // // // // // // // ROLE
+
+        public void UpdateRole(Role role)
+        {
+
+            var updateRole = GetRoleById(role.RoleId);
+
+            updateRole.RoleTitle = role.RoleTitle;
+            updateRole.IsDelete = role.IsDelete;
+
+
+            _context.Update(updateRole);
+            SaveChange();
+        }
+
         public int AddRole(Role role)
         {
             Role newRole = new Role()
@@ -31,20 +62,6 @@ namespace Core.Servises
         public bool IsExistRole(string roleTitle)
         {
             return _context.Roles.Any(r => r.RoleTitle == roleTitle);
-        }
-
-        public bool SaveChange()
-        {
-            try
-            {
-                _context.SaveChanges();
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         public List<Role> GetAllRoles(string roleNameFilter = "")
@@ -119,6 +136,16 @@ namespace Core.Servises
             }
 
             SaveChange();
+        }
+
+        public void EditPermissionToRole(List<int> permissionIds, int RoleId)
+        {
+            _context.RolePermissions
+                .Where(rp => rp.RoleId == RoleId)
+                .ToList()
+                .ForEach(rp => _context.RolePermissions.Remove(rp));
+
+            AddPermissionToRole(permissionIds, RoleId);
         }
     }
 }
