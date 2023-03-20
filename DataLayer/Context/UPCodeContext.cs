@@ -46,6 +46,9 @@ namespace DataLayer.Context
             modelBuilder.Entity<User>()
                 .HasQueryFilter(u => !u.IsDelete);
 
+            modelBuilder.Entity<Role>()
+                .HasQueryFilter(u => !u.IsDelete);
+
 
 
 
