@@ -1,4 +1,114 @@
 ﻿@page
+@using DataLayer.Entities.Permissions;
 @model Web.Pages.Admin.Role.CreateRoleModel
 @{
+    ViewData["Title"] = "Create Role";
 }
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Create New Role</h1>
+    </div>
+</div>
+<form method="post" enctype="multipart/form-data" dir="ltr">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Role Info
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+
+                    <div class="form-group col-md-8">
+                        <label>Role Title :</label>
+                        <input type="text" asp-for="Role.RoleTitle" class="form-control">
+                        <span asp-validation-for="Role.RoleTitle" class="text-danger"></span>
+                    </div>
+
+
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Access Roles
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <!-- Nav tabs -->
+                            @{
+                                List<Permission> permission = ViewData["Permissions"] as List<Permission>;
+                            }
+
+
+                            <ul>
+                                @foreach (var item in permission.Where(p => p.ParentId == null))
+                                {
+                                    <li>
+                                        <input type="checkbox" class="SPCheckBox"
+                                           name="SelectedPermission" value="@item.ParentId"> @item.PermissionTitle
+
+                                        @if (permission.Any(p => p.ParentId == item.PermissionId))
+                                        {
+                                            <ul>
+                                                @foreach (var sub1 in permission.Where(p => p.ParentId == item.PermissionId))
+                                                {
+                                                    <li>
+                                                        <input type="checkbox" class="SPCheckBox"
+                                                   name="SelectedPermission" value="@sub1.ParentId"> @sub1.PermissionTitle
+
+                                                        @if (permission.Any(p => p.ParentId == sub1.PermissionId))
+                                                        {
+                                                            <ul>
+                                                                @foreach (var sub2 in permission.Where(p => p.ParentId == sub1.PermissionId))
+                                                                {
+                                                                    <li>
+                                                                        <input type="checkbox" class="SPCheckBox"
+                                                           name="SelectedPermission" value="@sub2.ParentId"> @sub2.PermissionTitle
+
+                                                                        @if (permission.Any(p => p.ParentId == sub2.PermissionId))
+                                                                        {
+                                                                            <ul>
+                                                                                @foreach (var sub3 in permission.Where(p => p.ParentId == sub2.PermissionId))
+                                                                                {
+                                                                                    <li>
+                                                                                        <input type="checkbox" class="SPCheckBox"
+                                                                   name="SelectedPermission" value="@sub3.ParentId"> @sub3.PermissionTitle
+
+                                                                                    </li>
+                                                                                }
+                                                                            </ul>
+                                                                        }
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1">
+            <input type="submit" class="btn btn-success" value="Create Role" />
+        </div>
+    </div>
+</form>
