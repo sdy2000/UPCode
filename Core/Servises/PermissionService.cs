@@ -2,6 +2,7 @@
 using DataLayer.Context;
 using DataLayer.Entities.Permissions;
 using DataLayer.Entities.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Servises
 {
@@ -121,6 +122,15 @@ namespace Core.Servises
             return _context.RolePermissions
                 .Where(up => up.RoleId == roleId)
                 .Select(up => up.PermissionId)
+                .ToList();
+        }
+
+        public List<string> GetPermissionTitleRole(int roleId)
+        {
+            return _context.RolePermissions
+                .Where(up => up.RoleId == roleId)
+                .Include(p => p.Permission)
+                .Select(p => p.Permission.PermissionTitle)
                 .ToList();
         }
 

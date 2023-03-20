@@ -25,6 +25,7 @@ namespace Core.Servises.Interfaces
 
         List<Permission> GetAllPermissions();
         List<int> GetPermissionRole(int roleId);
+        List<string> GetPermissionTitleRole(int roleId);
         void AddPermissionToRole(List<int> permissionIds, int RoleId);
         void EditPermissionToRole(List<int> permissionIds, int RoleId);
 
