@@ -19,5 +19,15 @@ namespace Web.Pages.Admin.Role
             ViewData["PermissionTitle"] = _permissionService.GetPermissionTitleRole(id);
             Role = _permissionService.GetRoleById(id);
         }
+
+        public IActionResult OnPost()
+        {
+            var role = _permissionService.GetRoleById(Role.RoleId);
+            role.IsDelete = true;
+
+            _permissionService.UpdateRole(role);
+
+            return Redirect("/Admin/Role");
+        }
     }
 }
