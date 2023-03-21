@@ -1,6 +1,8 @@
 ﻿using Core.DTOs;
 using Core.Servises.Interfaces;
 using DataLayer.Context;
+using DataLayer.Entities.Users;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Core.Servises
 {
@@ -40,6 +42,23 @@ namespace Core.Servises
                     EpisodeCount = c.CourseEpisodes.Count()
                 })
                 .ToList();
+        }
+
+        public List<SelectListItem> GetGroupForManageCourse()
+        {
+            return _context.CourseGroups
+                .Where(g => g.ParentId == null)
+                .Select(g => new SelectListItem()
+                {
+                    Text = g.GroupTitle,
+                    Value = g.GroupId.ToString()
+                })
+                .ToList();
+        }
+
+        public User GetTeacher(string teacherName)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserName == teacherName);
         }
     }
 }
