@@ -21,7 +21,7 @@
     </div>
 }
 <br />
-<div class="row">
+<div class="row" dir="ltr">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -33,18 +33,20 @@
                     <div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
                         <form>
                             <div class="row">
-                                <div class="col-sm-4">
+                                <div class="col-sm-6">
                                     <div id="dataTables-example_filter" class="dataTables_filter">
                                         <label>
-                                            <input type="search" name="CourseNameFilter" class="form-control" placeholder="نام دوره" />
+                                            <input type="search" name="CourseNameFilter" class="form-control" placeholder="Course Title" />
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
-                                </div>
-                                <div class="col-sm-2">
-                                    <input type="submit" class="btn btn-sm btn-info" value="Action" />
-                                    <a class="btn btn-sm btn-warning" href="/Admin/Course">Remove Filter</a>
+                                    <div class="col-sm-2">
+                                        <input type="submit" class="btn btn-sm btn-info" value="Action" />
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <a class="btn btn-sm btn-warning" href="/Admin/Course">Remove Filter</a>
+                                    </div>
                                 </div>
                             </div>
                         </form>

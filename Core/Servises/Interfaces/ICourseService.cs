@@ -4,6 +4,6 @@ namespace Core.Servises.Interfaces
 {
     public interface ICourseService
     {
-        List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "")
+        List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "");
     }
 }
