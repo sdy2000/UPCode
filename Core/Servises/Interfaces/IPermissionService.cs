@@ -28,6 +28,7 @@ namespace Core.Servises.Interfaces
         List<string> GetPermissionTitleRole(int roleId);
         void AddPermissionToRole(List<int> permissionIds, int RoleId);
         void EditPermissionToRole(List<int> permissionIds, int RoleId);
+        bool CheckPermission(int permissionId, string userName);
 
         #endregion
     }

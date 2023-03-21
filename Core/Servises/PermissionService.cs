@@ -157,5 +157,25 @@ namespace Core.Servises
 
             AddPermissionToRole(permissionIds, RoleId);
         }
+
+        public bool CheckPermission(int permissionId, string userName)
+        {
+            int userId = _context.Users.Single(u => u.UserName == userName).UserId;
+
+            List<int> userRoles = _context.UserRoles
+                .Where(ur => ur.UserId == userId)
+                .Select(r => r.RoleId)
+                .ToList();
+
+            if (!userRoles.Any())
+                return false;
+
+            List<int> rolePermission = _context.RolePermissions
+                .Where(rp => rp.PermissionId == permissionId)
+                .Select(r => r.RoleId)
+                .ToList();
+
+            return rolePermission.Any(p => userRoles.Contains(p));
+        }
     }
 }
