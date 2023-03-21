@@ -15,7 +15,7 @@ namespace Web.Pages.Admin.Role
         }
 
         [BindProperty]
-        public DataLayer.Entities.User.Role Role { get; set; }
+        public DataLayer.Entities.Users.Role Role { get; set; }
         public void OnGet(int id)
         {
             ViewData["PermissionTitle"] = _permissionService.GetPermissionTitleRole(id);

@@ -1,5 +1,5 @@
 ﻿using DataLayer.Entities.Permissions;
-using DataLayer.Entities.User;
+using DataLayer.Entities.Users;
 
 namespace Core.Servises.Interfaces
 {

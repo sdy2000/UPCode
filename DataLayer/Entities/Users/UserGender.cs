@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataLayer.Entities.User
+namespace DataLayer.Entities.Users
 {
     public class UserGender
     {

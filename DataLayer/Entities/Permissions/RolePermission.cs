@@ -1,4 +1,4 @@
-﻿using DataLayer.Entities.User;
+﻿using DataLayer.Entities.Users;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

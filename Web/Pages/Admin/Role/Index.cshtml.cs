@@ -13,7 +13,7 @@ namespace Web.Pages.Admin.Role
             _permission = permission;
         }
 
-        public List<DataLayer.Entities.User.Role> RoleList { get; set; }
+        public List<DataLayer.Entities.Users.Role> RoleList { get; set; }
         public void OnGet(string userRoleFilter)
         {
             RoleList = _permission.GetAllRoles(userRoleFilter);

@@ -6,7 +6,7 @@ using Core.Senders;
 using Core.Servises.Interfaces;
 using Datalayer.Entities.Wallets;
 using DataLayer.Context;
-using DataLayer.Entities.User;
+using DataLayer.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;

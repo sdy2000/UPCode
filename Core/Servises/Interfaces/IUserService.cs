@@ -1,6 +1,6 @@
 ﻿using Core.DTOs;
 using Datalayer.Entities.Wallets;
-using DataLayer.Entities.User;
+using DataLayer.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

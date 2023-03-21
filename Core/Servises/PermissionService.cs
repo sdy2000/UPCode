@@ -1,7 +1,7 @@
 ﻿using Core.Servises.Interfaces;
 using DataLayer.Context;
 using DataLayer.Entities.Permissions;
-using DataLayer.Entities.User;
+using DataLayer.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace Core.Servises

@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DataLayer.Entities.Users;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTOs
 {
     public class UserForAdminViewModel
     {
-        public List<DataLayer.Entities.User.User> Users { get; set; }
+        public List<User> Users { get; set; }
         public int CurrentPage { get; set; }
         public int PageCount { get; set; }
         public int UserCount { get; set; }

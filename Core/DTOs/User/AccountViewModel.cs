@@ -1,4 +1,4 @@
-﻿using DataLayer.Entities.User;
+﻿using DataLayer.Entities.Users;
 using System.ComponentModel.DataAnnotations;
 
 namespace Core.DTOs

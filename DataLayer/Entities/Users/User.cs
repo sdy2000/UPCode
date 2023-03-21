@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Datalayer.Entities.Wallets;
 
-namespace DataLayer.Entities.User
+namespace DataLayer.Entities.Users
 {
     public class User
     {

@@ -1,7 +1,7 @@
 ﻿using DataLayer.Entities.Permissions;
 using System.ComponentModel.DataAnnotations;
 
-namespace DataLayer.Entities.User
+namespace DataLayer.Entities.Users
 {
     public class Role
     {

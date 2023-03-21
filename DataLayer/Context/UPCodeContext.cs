@@ -1,6 +1,7 @@
 ﻿using Datalayer.Entities.Wallets;
+using DataLayer.Entities.Courses;
 using DataLayer.Entities.Permissions;
-using DataLayer.Entities.User;
+using DataLayer.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Context
@@ -36,11 +37,26 @@ namespace DataLayer.Context
 
         #endregion
 
+        #region COURSE
 
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseGroup> CourseGroups { get; set; }
+        public DbSet<CourseLevel> CourseLevels { get; set; }
+        public DbSet<CourseStatus> CourseStatuses { get; set; }
+        public DbSet<CourseEpisode> CourseEpisodes { get; set; }
+
+        #endregion
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+               .SelectMany(t => t.GetForeignKeys())
+               .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
 
 
             modelBuilder.Entity<User>()
@@ -49,6 +65,32 @@ namespace DataLayer.Context
             modelBuilder.Entity<Role>()
                 .HasQueryFilter(u => !u.IsDelete);
 
+            modelBuilder.Entity<CourseGroup>()
+                .HasQueryFilter(u => !u.IsDelete);
+
+            modelBuilder.Entity<CourseEpisode>()
+                .HasQueryFilter(u => !u.IsDelete);
+
+            modelBuilder.Entity<Course>()
+                .HasQueryFilter(u => !u.IsDelete);
+
+            modelBuilder.Entity<Course>()
+                .Property(c => c.SubGroupId)
+                .IsRequired(false);
+
+
+            modelBuilder.Entity<Course>()
+             .HasOne<CourseGroup>(f => f.Group)
+             .WithMany(g => g.Groups)
+             .HasForeignKey(f => f.GroupId)
+             .OnDelete(DeleteBehavior.Restrict);
+
+
+            modelBuilder.Entity<Course>()
+               .HasOne<CourseGroup>(f => f.SubGroup)
+               .WithMany(g => g.SubGroups)
+               .HasForeignKey(f => f.SubGroupId)
+               .OnDelete(DeleteBehavior.Restrict);
 
 
 
