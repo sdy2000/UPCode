@@ -1,7 +1,7 @@
 ﻿@page
 @using Core.Servises.Interfaces
-
 @model Web.Pages.Admin.User.IndexModel
+@inject IPermissionService _permissionService
 @{
     ViewData["Title"] = "User Management";
 }
@@ -13,10 +13,12 @@
     </div>
 </div>
 
-<div class="container">
-    <a href="/Admin/User/CreateUser" class="btn btn-success btn-outline">Add New User</a>
-</div>
-
+@if (_permissionService.CheckPermission(3, User.Identity.Name))
+{
+    <div class="container">
+        <a href="/Admin/User/CreateUser" class="btn btn-success btn-outline">Add New User</a>
+    </div>
+}
 <br />
 <div class="row" dir="ltr">
     <div class="col-lg-12">
@@ -113,10 +115,14 @@
                                         </td>
                                         <td>@user.RegisterDate.ToString("MMM/dd/yyyy")</td>
                                         <td>
-                                            <a href="/Admin/User/EditUser/@user.UserId" class="btn btn-warning btn-outline btn-sm">Edit </a>
-
-                                            <a href="/Admin/User/DeleteUser/@user.UserId" class="btn btn-danger btn-outline btn-sm">Delete </a>
-
+                                            @if (_permissionService.CheckPermission(4, User.Identity.Name))
+                                            {
+                                                <a href="/Admin/User/EditUser/@user.UserId" class="btn btn-warning btn-outline btn-sm">Edit </a>
+                                            }
+                                            @if (_permissionService.CheckPermission(5, User.Identity.Name))
+                                            {
+                                                <a href="/Admin/User/DeleteUser/@user.UserId" class="btn btn-danger btn-outline btn-sm">Delete </a>
+                                            }
                                             <a href="/Admin/User/UserComments/@user.UserId" class="btn btn-info btn-sm disabled">Comments </a>
                                         </td>
                                     </tr>

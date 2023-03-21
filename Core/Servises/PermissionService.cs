@@ -160,7 +160,10 @@ namespace Core.Servises
 
         public bool CheckPermission(int permissionId, string userName)
         {
-            int userId = _context.Users.Single(u => u.UserName == userName).UserId;
+            if (userName == null)
+                return false;
+
+            int userId = _context.Users.SingleOrDefault(u => u.UserName == userName).UserId;
 
             List<int> userRoles = _context.UserRoles
                 .Where(ur => ur.UserId == userId)

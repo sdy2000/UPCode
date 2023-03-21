@@ -1,10 +1,12 @@
 using Core.DTOs;
+using Core.Security;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages.Admin.User
 {
+    [PermissionChecker(5)]
     public class DeleteUserModel : PageModel
     {
         private IUserService _userService;

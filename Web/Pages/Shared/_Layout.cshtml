@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Core.Servises.Interfaces;
+@inject IPermissionService _permissionService;
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -52,22 +55,31 @@
                         <li>
                             <a href="/Admin"><i class="fa fa-dashboard fa-fw"></i> Admin Panel</a>
                         </li>
-                        <li>
-                            <a href="#"><i class="fa fa-user fa-fw"></i> User Management<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="/Admin/User">User</a>
-                                </li>
-                                <li>
-                                    <a href="/Admin/User/DeletedUser">Deleted User</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="/Admin/Role"><i class="fa fa-users fa-fw"></i> Role Management</span></a>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        @if (_permissionService.CheckPermission(2, User.Identity.Name))
+                        {
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-fw"></i> User Management<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="/Admin/User">User</a>
+                                    </li>
+                                    @if (_permissionService.CheckPermission(6, User.Identity.Name))
+                                    {
+                                        <li>
+                                            <a href="/Admin/User/DeletedUser">Deleted User</a>
+                                        </li>
+                                    }
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        }
+                        @if (_permissionService.CheckPermission(2, User.Identity.Name))
+                        {
+                            <li>
+                                <a href="/Admin/Role"><i class="fa fa-users fa-fw"></i> Role Management</a>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        }
                     </ul>
                     <!-- /#side-menu -->
                 </div>
