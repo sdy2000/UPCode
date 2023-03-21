@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Course\demoes\" />
     <Folder Include="wwwroot\UserAvatar\IconSize\" />
     <Folder Include="wwwroot\UserAvatar\ThumbSize\" />
     <Folder Include="wwwroot\UserAvatar\NormalSize\" />

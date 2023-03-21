@@ -1,7 +1,12 @@
-﻿using Core.DTOs;
+﻿using Core.Convertors;
+using Core.DTOs;
+using Core.Generators;
+using Core.Security;
 using Core.Servises.Interfaces;
 using DataLayer.Context;
+using DataLayer.Entities.Courses;
 using DataLayer.Entities.Users;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Core.Servises
@@ -16,6 +21,144 @@ namespace Core.Servises
         }
 
 
+
+
+        public string CourseImagePath(string folderName, string imgName)
+        {
+            string path = Path.Combine(
+                 Directory.GetCurrentDirectory(),
+                 "wwwroot/Course/" + folderName,
+                 imgName);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            return path;
+        }
+
+        public string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg")
+        {
+
+
+            if (img != null && img.IsImage() && !FileValidator.CheckIfExiclFile(img))
+            {
+
+                string normalPath = CourseImagePath("NormalSize", imgName);
+                string thumbPath = CourseImagePath("ThumbSize", imgName);
+                string iconPath = CourseImagePath("IconSize", imgName);
+
+                if (imgName != "No-Photo.jpg")
+                {
+                    if (File.Exists(normalPath))
+                        File.Delete(normalPath);
+
+                    if (File.Exists(thumbPath))
+                        File.Delete(thumbPath);
+
+                    if (File.Exists(iconPath))
+                        File.Delete(iconPath);
+                }
+
+                imgName = new string
+                (Path.GetFileNameWithoutExtension(img.FileName).Take(10).ToArray()).Replace(' ', '-') + "-" +
+                NameGenerator.GeneratorUniqCode() + "-" +
+                DateTime.Now.ToString("yyyymmssfff") + Path.GetExtension(img.FileName);
+
+                normalPath = CourseImagePath("NormalSize", imgName);
+                thumbPath = CourseImagePath("ThumbSize", imgName);
+                iconPath = CourseImagePath("IconSize", imgName);
+
+                using (var stream = new FileStream(normalPath, FileMode.Create))
+                {
+                    img.CopyTo(stream);
+                }
+
+
+                #region RESIZE IMAGE TO THUMB
+
+                ImageConvertor imgResizeThumb = new ImageConvertor();
+
+                imgResizeThumb.Image_resize(normalPath, thumbPath, 184);
+
+                #endregion
+
+                #region RESIZE IMAGE TO ICON
+
+                ImageConvertor imgResize = new ImageConvertor();
+
+                imgResize.Image_resize(normalPath, iconPath, 64);
+
+                #endregion
+
+
+                return imgName;
+            }
+            else if (imgName != "No-Photo.jpg")
+            {
+                return imgName;
+            }
+            else
+            {
+                return "No-Photo.jpg";
+            }
+        }
+
+        public string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null)
+        {
+            if (demoCourse != null)
+            {
+                string demoPath = CourseImagePath("demoes",CourseDemoName);
+                if (CourseDemoName != null)
+                {
+                    if (File.Exists(demoPath))
+                        File.Delete(demoPath);
+                }
+                CourseDemoName = NameGenerator.GeneratorUniqCode() + Path.GetExtension(demoCourse.FileName);
+                demoPath = CourseImagePath("demoes", CourseDemoName);
+                using (var stream = new FileStream(demoPath, FileMode.Create))
+                {
+                    demoCourse.CopyTo(stream);
+                }
+
+                return CourseDemoName;
+            }
+            else if (CourseDemoName != null)
+            {
+                return CourseDemoName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public bool SaveChange()
+        {
+            try
+            {
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+
+        public int AddCourse(Course course, IFormFile imgCourse, IFormFile demoCourse)
+        {
+            course.CourseImageName = SaveOrUpDateImg(imgCourse);
+            course.CourseDemoFileName = SaveOrUpdateFile(demoCourse);
+            course.CoursePrice = (course.CoursePrice == null) ? 0 : course.CoursePrice;
+
+            _context.Courses.Add(course);
+
+            SaveChange();
+
+            return course.CourseId;
+        }
         public List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "")
         {
             if (!string.IsNullOrEmpty(CourseNameFilter))
