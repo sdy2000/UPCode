@@ -18,7 +18,7 @@ namespace Core.Servises.Interfaces
         bool IsExistUserName(string userName);
         bool IsExistEmail(string email);
         bool IsExistActiveCode(string activeCode);
-        string imgPath(string folderName, string imgName);
+        string UserImagePath(string folderName, string imgName);
         string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg");
         bool SaveChange();
 

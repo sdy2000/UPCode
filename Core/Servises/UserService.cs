@@ -95,7 +95,7 @@ namespace Core.Servises
             return _context.Users.Any(u => u.ActiveCode == activeCode);
         }
 
-        public string imgPath(string folderName, string imgName)
+        public string UserImagePath(string folderName, string imgName)
         {
             string path = Path.Combine(
                  Directory.GetCurrentDirectory(),
@@ -112,9 +112,9 @@ namespace Core.Servises
             if (img != null && img.IsImage() && !FileValidator.CheckIfExiclFile(img))
             {
 
-                string normalPath = imgPath("NormalSize", imgName);
-                string thumbPath = imgPath("ThumbSize", imgName);
-                string iconPath = imgPath("IconSize", imgName);
+                string normalPath = UserImagePath("NormalSize", imgName);
+                string thumbPath = UserImagePath("ThumbSize", imgName);
+                string iconPath = UserImagePath("IconSize", imgName);
 
                 if (imgName != "No-Photo.jpg")
                 {
@@ -133,9 +133,9 @@ namespace Core.Servises
                 NameGenerator.GeneratorUniqCode() + "-" +
                 DateTime.Now.ToString("yyyymmssfff") + Path.GetExtension(img.FileName);
 
-                normalPath = imgPath("NormalSize", imgName);
-                thumbPath = imgPath("ThumbSize", imgName);
-                iconPath = imgPath("IconSize", imgName);
+                normalPath = UserImagePath("NormalSize", imgName);
+                thumbPath = UserImagePath("ThumbSize", imgName);
+                iconPath = UserImagePath("IconSize", imgName);
 
                 using (var stream = new FileStream(normalPath, FileMode.Create))
                 {
@@ -147,7 +147,7 @@ namespace Core.Servises
 
                 ImageConvertor imgResizeThumb = new ImageConvertor();
 
-                imgResizeThumb.Image_resize(normalPath, thumbPath, 150);
+                imgResizeThumb.Image_resize(normalPath, thumbPath, 184);
 
                 #endregion
 
@@ -155,7 +155,7 @@ namespace Core.Servises
 
                 ImageConvertor imgResize = new ImageConvertor();
 
-                imgResize.Image_resize(normalPath, iconPath, 56);
+                imgResize.Image_resize(normalPath, iconPath, 64);
 
                 #endregion
 
