@@ -35,6 +35,7 @@ builder.Services.AddDbContext<UPCodeContext>(options =>
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IPermissionService, PermissionService>();
+builder.Services.AddTransient<ICourseService, CourseService>();
 
 #endregion
 
