@@ -1,8 +1,10 @@
+using Core.Security;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages.Admin.Role
 {
+    [PermissionChecker(9)]
     public class IndexModel : PageModel
     {
         private IPermissionService _permission;

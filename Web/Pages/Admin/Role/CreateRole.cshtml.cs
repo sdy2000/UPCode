@@ -1,9 +1,11 @@
+using Core.Security;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages.Admin.Role
 {
+    [PermissionChecker(10)]
     public class CreateRoleModel : PageModel
     {
         private IPermissionService _permission;

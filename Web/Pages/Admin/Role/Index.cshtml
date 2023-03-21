@@ -1,5 +1,7 @@
 ﻿@page
+@using Core.Servises.Interfaces;
 @model Web.Pages.Admin.Role.IndexModel
+@inject IPermissionService _permissionService
 @{
 
     ViewData["Title"] = "Role Management";
@@ -12,10 +14,12 @@
     </div>
 </div>
 
-<div class="container">
-    <a href="/Admin/Role/CreateRole" class="btn btn-success btn-outline">Create New Role</a>
-</div>
-
+@if (_permissionService.CheckPermission(10, User.Identity.Name))
+{
+    <div class="container">
+        <a href="/Admin/Role/CreateRole" class="btn btn-success btn-outline">Create New Role</a>
+    </div>
+}
 <br />
 <div class="row" dir="ltr">
     <div class="col-lg-12">
@@ -65,8 +69,14 @@
                                         <td>@role.RoleTitle</td>
                                         <td>@role.CreateDate.ToString("MMM/dd/yyyy")</td>
                                         <td>
-                                            <a href="/Admin/Role/EditRole/@role.RoleId" class="btn btn-warning btn-outline btn-sm">Edit</a>
-                                            <a href="/Admin/Role/DeleteRole/@role.RoleId" class="btn btn-danger btn-outline btn-sm">Delete</a>
+                                            @if (_permissionService.CheckPermission(11, User.Identity.Name))
+                                            {
+                                                <a href="/Admin/Role/EditRole/@role.RoleId" class="btn btn-warning btn-outline btn-sm">Edit</a>
+                                            }
+                                            @if (_permissionService.CheckPermission(12, User.Identity.Name))
+                                            {
+                                                <a href="/Admin/Role/DeleteRole/@role.RoleId" class="btn btn-danger btn-outline btn-sm">Delete</a>
+                                            }
                                         </td>
                                     </tr>
                                 }
