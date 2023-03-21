@@ -73,6 +73,13 @@
                                 <!-- /.nav-second-level -->
                             </li>
                         }
+                        @if (_permissionService.CheckPermission(13, User.Identity.Name))
+                        {
+                            <li>
+                                <a href="/Admin/Course"><i class="fa fa-home fa-fw"></i> Course Management</a>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        }
                         @if (_permissionService.CheckPermission(2, User.Identity.Name))
                         {
                             <li>
