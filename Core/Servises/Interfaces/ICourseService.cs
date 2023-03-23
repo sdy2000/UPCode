@@ -30,6 +30,7 @@ namespace Core.Servises.Interfaces
 
         List<CourseGroup> GetAllGroup();
         bool AddGroup(CourseGroup group);
+        bool UpdateGroup(CourseGroup group);
         CourseGroup GetGroupById(int groupId);
 
         #endregion

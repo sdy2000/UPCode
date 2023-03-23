@@ -20,5 +20,19 @@ namespace Web.Pages.Admin.CourseGroup
         {
             CourseGroup = _courseService.GetGroupById(id);
         }
+
+        public IActionResult OnPost()
+        {
+            if (CourseGroup.GroupTitle == null)
+                return Page();
+
+            if (CourseGroup.ParentId == 0)
+            {
+                CourseGroup.ParentId = null;
+            }
+            _courseService.UpdateGroup(CourseGroup);
+
+            return Redirect("/Admin/CourseGroup");
+        }
     }
 }

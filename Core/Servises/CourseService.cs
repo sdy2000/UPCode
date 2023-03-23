@@ -237,6 +237,11 @@ namespace Core.Servises
             return SaveChange();
         }
 
+        public bool UpdateGroup(CourseGroup group)
+        {
+            _context.CourseGroups.Update(group);
+            return SaveChange();
+        }
         public CourseGroup GetGroupById(int groupId)
         {
             return _context.CourseGroups.Find(groupId);
