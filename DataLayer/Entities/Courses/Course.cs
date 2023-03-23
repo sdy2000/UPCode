@@ -40,7 +40,6 @@ namespace DataLayer.Entities.Courses
 
         [Display(Name = "Course Description")]
         [Required(ErrorMessage = "Please enter {0}.")]
-        [MaxLength(100, ErrorMessage = "{0} cannot be greater than {1}!")]
         public string CourseDescription { get; set; }
 
 

@@ -47,8 +47,6 @@ namespace Core.Servises
                  Directory.GetCurrentDirectory(),
                  "wwwroot/Course/" + folderName,
                  imgName);
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(path);
 
             return path;
         }
@@ -120,18 +118,19 @@ namespace Core.Servises
             }
         }
 
-        public string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null)
+        public string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null, string filePath = "wwwroot/Course/demoes")
         {
             if (demoCourse != null)
             {
-                string demoPath = CourseImagePath("demoes", CourseDemoName);
+                string demoPath = "";
                 if (CourseDemoName != null)
                 {
+                    demoPath = Path.Combine(Directory.GetCurrentDirectory(), filePath, CourseDemoName);
                     if (File.Exists(demoPath))
                         File.Delete(demoPath);
                 }
                 CourseDemoName = NameGenerator.GeneratorUniqCode() + Path.GetExtension(demoCourse.FileName);
-                demoPath = CourseImagePath("demoes", CourseDemoName);
+                demoPath = Path.Combine(Directory.GetCurrentDirectory(), filePath, CourseDemoName);
                 using (var stream = new FileStream(demoPath, FileMode.Create))
                 {
                     demoCourse.CopyTo(stream);
@@ -174,8 +173,8 @@ namespace Core.Servises
             course.CoursePrice = (course.CoursePrice == null) ? 0 : course.CoursePrice;
 
 
-            if (AddCourse(course))
-                SaveChange();
+            AddCourse(course);
+            SaveChange();
 
             return course.CourseId;
         }
