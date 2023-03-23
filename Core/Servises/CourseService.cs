@@ -230,10 +230,16 @@ namespace Core.Servises
         {
             return _context.CourseGroups.ToList();
         }
+
         public bool AddGroup(CourseGroup group)
         {
             _context.CourseGroups.Add(group);
             return SaveChange();
+        }
+
+        public CourseGroup GetGroupById(int groupId)
+        {
+            return _context.CourseGroups.Find(groupId);
         }
     }
 }
