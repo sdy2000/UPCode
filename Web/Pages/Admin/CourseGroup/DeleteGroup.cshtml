@@ -1,4 +1,43 @@
-﻿@page
+﻿@page "{id}"
 @model Web.Pages.Admin.CourseGroup.DeleteGroupModel
 @{
+    ViewData["Title"] = "Delete Group";
 }
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Delete Group</h1>
+    </div>
+</div>
+
+<div class="row" dir="ltr">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+               Group Info
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <dl class="dl-horizontal">
+
+                    <dt>Group Title :</dt>
+                    <dd>@Model.CourseGroup.GroupTitle</dd>
+                    <br />
+
+
+                    <dt>
+                        <a href="/Admin/Role" class="btn btn-info">Canceled</a>
+                    </dt>
+                    <dd>
+                        <form method="post">
+                            <input type="hidden" asp-for="CourseGroup.GroupId" />
+
+                            <input type="submit" class="btn btn-danger" value="Delete Group" />
+                        </form>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

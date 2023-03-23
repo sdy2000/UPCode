@@ -31,6 +31,7 @@ namespace Core.Servises.Interfaces
         List<CourseGroup> GetAllGroup();
         bool AddGroup(CourseGroup group);
         bool UpdateGroup(CourseGroup group);
+        void DeleteGroup(int groupId);
         CourseGroup GetGroupById(int groupId);
 
         #endregion

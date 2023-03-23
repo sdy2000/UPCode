@@ -242,6 +242,14 @@ namespace Core.Servises
             _context.CourseGroups.Update(group);
             return SaveChange();
         }
+
+        public void DeleteGroup(int groupId)
+        {
+            var group = GetGroupById(groupId);
+            group.IsDelete = true;
+
+            UpdateGroup(group);
+        }
         public CourseGroup GetGroupById(int groupId)
         {
             return _context.CourseGroups.Find(groupId);
