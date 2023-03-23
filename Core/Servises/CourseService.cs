@@ -219,6 +219,17 @@ namespace Core.Servises
                 })
                 .ToList();
         }
+        public List<SelectListItem> GetSubGroupForManageCourse(int parentId)
+        {
+            return _context.CourseGroups
+                .Where(g => g.ParentId == parentId)
+                .Select(g => new SelectListItem()
+                {
+                    Text = g.GroupTitle,
+                    Value = g.GroupId.ToString()
+                })
+                .ToList();
+        }
 
 
 

@@ -23,6 +23,7 @@ namespace Core.Servises.Interfaces
         int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse);
         List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "");
         List<SelectListItem> GetGroupForManageCourse();
+        List<SelectListItem> GetSubGroupForManageCourse(int parentId);
         #endregion
 
 

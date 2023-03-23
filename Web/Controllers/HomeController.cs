@@ -1,14 +1,18 @@
-﻿using Core.Servises.Interfaces;
+﻿using Core.Servises;
+using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Web.Controllers
 {
     public class HomeController : Controller
     {
         private IUserService _userService;
-        public HomeController(IUserService userService)
+        private ICourseService _courseService;
+        public HomeController(IUserService userService, ICourseService courseService)
         {
             _userService = userService;
+            _courseService = courseService;
         }
 
         public IActionResult Index()
@@ -41,6 +45,16 @@ namespace Web.Controllers
             }
 
             return View();
+        }
+
+
+        public JsonResult GetSubGroups(int id)
+        {
+            List<SelectListItem> subGroups = new List<SelectListItem>()
+            {
+                new SelectListItem(){Text="Selected",Value="" }
+            }; subGroups.AddRange(_courseService.GetSubGroupForManageCourse(id));
+            return Json(new SelectList(subGroups, "Value", "Text"));
         }
     }
 }
