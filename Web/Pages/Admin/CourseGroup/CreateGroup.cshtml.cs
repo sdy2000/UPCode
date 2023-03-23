@@ -23,5 +23,20 @@ namespace Web.Pages.Admin.CourseGroup
                 ParentId = id
             };
         }
+
+
+        public IActionResult OnPost()
+        {
+            if (CourseGroup.GroupTitle == null)
+                return Page();
+
+            if (CourseGroup.ParentId == 0)
+            {
+                CourseGroup.ParentId = null;
+            }
+            _courseService.AddGroup(CourseGroup);
+
+            return Redirect("/Admin/CourseGroup");
+        }
     }
 }

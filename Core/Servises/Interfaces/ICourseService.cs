@@ -8,18 +8,29 @@ namespace Core.Servises.Interfaces
 {
     public interface ICourseService
     {
-        List<CourseGroup> GetAllGroup();
-        bool AddCourse(Course course);
-        string CourseImagePath(string folderName, string imgName);
-        string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg");
-        string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null);
         bool SaveChange();
 
 
-        int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse);
 
+        #region COURSE
+
+        bool AddCourse(Course course);
+        User GetTeacher(string teacherName); 
+        string CourseImagePath(string folderName, string imgName);
+        string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg");
+        string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null);
+
+        int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse);
         List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "");
         List<SelectListItem> GetGroupForManageCourse();
-        User GetTeacher(string teacherName);
+        #endregion
+
+
+        #region GROUP
+
+        List<CourseGroup> GetAllGroup();
+        bool AddGroup(CourseGroup group);
+
+        #endregion
     }
 }

@@ -21,12 +21,7 @@ namespace Core.Servises
         }
 
 
-
-        public List<CourseGroup> GetAllGroup()
-        {
-            return _context.CourseGroups.ToList();
-        }
-
+        // // // // // // // // // Course
         public bool AddCourse(Course course)
         {
             try
@@ -39,6 +34,11 @@ namespace Core.Servises
             {
                 return false;
             }
+        }
+
+        public User GetTeacher(string teacherName)
+        {
+            return _context.Users.SingleOrDefault(u => u.UserName == teacherName);
         }
 
         public string CourseImagePath(string folderName, string imgName)
@@ -167,7 +167,6 @@ namespace Core.Servises
 
 
 
-        // // // // // // // // // Course
         public int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse)
         {
             course.CourseImageName = SaveOrUpDateImg(imgCourse);
@@ -221,9 +220,20 @@ namespace Core.Servises
                 .ToList();
         }
 
-        public User GetTeacher(string teacherName)
+
+
+
+
+
+        // // // // // // // // // Group
+        public List<CourseGroup> GetAllGroup()
         {
-            return _context.Users.SingleOrDefault(u => u.UserName == teacherName);
+            return _context.CourseGroups.ToList();
+        }
+        public bool AddGroup(CourseGroup group)
+        {
+            _context.CourseGroups.Add(group);
+            return SaveChange();
         }
     }
 }
