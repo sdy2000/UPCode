@@ -82,7 +82,7 @@ namespace Web.Pages.Admin.Course
             #endregion
 
 
-            _courseService.AddCourse(Course, ImgeUp, demoUp);
+            _courseService.AddCourseFromAdminPanel(Course, ImgeUp, demoUp);
 
             return Redirect("Index");
         }

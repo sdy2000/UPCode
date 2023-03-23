@@ -8,13 +8,15 @@ namespace Core.Servises.Interfaces
 {
     public interface ICourseService
     {
+        List<CourseGroup> GetAllGroup();
+        bool AddCourse(Course course);
         string CourseImagePath(string folderName, string imgName);
         string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg");
         string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null);
         bool SaveChange();
 
 
-        int AddCourse(Course course, IFormFile imgCourse, IFormFile demoCourse);
+        int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse);
 
         List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "");
         List<SelectListItem> GetGroupForManageCourse();

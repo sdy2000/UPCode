@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Core.Servises
 {
-    public class CourseService: ICourseService
+    public class CourseService : ICourseService
     {
         private UPCodeContext _context;
 
@@ -22,7 +22,24 @@ namespace Core.Servises
 
 
 
+        public List<CourseGroup> GetAllGroup()
+        {
+            return _context.CourseGroups.ToList();
+        }
 
+        public bool AddCourse(Course course)
+        {
+            try
+            {
+                _context.Courses.Add(course);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public string CourseImagePath(string folderName, string imgName)
         {
             string path = Path.Combine(
@@ -106,7 +123,7 @@ namespace Core.Servises
         {
             if (demoCourse != null)
             {
-                string demoPath = CourseImagePath("demoes",CourseDemoName);
+                string demoPath = CourseImagePath("demoes", CourseDemoName);
                 if (CourseDemoName != null)
                 {
                     if (File.Exists(demoPath))
@@ -147,15 +164,15 @@ namespace Core.Servises
 
 
 
-        public int AddCourse(Course course, IFormFile imgCourse, IFormFile demoCourse)
+        public int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse)
         {
             course.CourseImageName = SaveOrUpDateImg(imgCourse);
             course.CourseDemoFileName = SaveOrUpdateFile(demoCourse);
             course.CoursePrice = (course.CoursePrice == null) ? 0 : course.CoursePrice;
 
-            _context.Courses.Add(course);
 
-            SaveChange();
+            if (AddCourse(course))
+                SaveChange();
 
             return course.CourseId;
         }
