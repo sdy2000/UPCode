@@ -40,6 +40,7 @@ namespace Core.Servises
                 return false;
             }
         }
+
         public string CourseImagePath(string folderName, string imgName)
         {
             string path = Path.Combine(
@@ -164,6 +165,9 @@ namespace Core.Servises
 
 
 
+
+
+        // // // // // // // // // Course
         public int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse)
         {
             course.CourseImageName = SaveOrUpDateImg(imgCourse);
@@ -176,6 +180,7 @@ namespace Core.Servises
 
             return course.CourseId;
         }
+
         public List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "")
         {
             if (!string.IsNullOrEmpty(CourseNameFilter))

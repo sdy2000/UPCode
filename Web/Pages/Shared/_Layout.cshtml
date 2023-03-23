@@ -73,10 +73,17 @@
                                 <!-- /.nav-second-level -->
                             </li>
                         }
+                        @if (_permissionService.CheckPermission(21, User.Identity.Name))
+                        {
+                            <li>
+                                <a href="/Admin/Course"><i class="fa fa-mail-forward fa-fw"></i> Course Management</a>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        }
                         @if (_permissionService.CheckPermission(13, User.Identity.Name))
                         {
                             <li>
-                                <a href="/Admin/Course"><i class="fa fa-home fa-fw"></i> Course Management</a>
+                                <a href="/Admin/Course"><i class="fa fa-home fa-fw"></i>Group Management</a>
                                 <!-- /.nav-second-level -->
                             </li>
                         }
