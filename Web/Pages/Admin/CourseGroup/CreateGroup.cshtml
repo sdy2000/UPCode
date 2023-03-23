@@ -1,4 +1,45 @@
-﻿@page
+﻿@page "{id?}"
 @model Web.Pages.Admin.CourseGroup.CreateGroupModel
 @{
+    ViewData["Title"] = "Create New Group";
 }
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Create New Group</h1>
+    </div>
+</div>
+<form method="post" dir="ltr">
+
+    <input type="hidden" asp-for="CourseGroup.ParentId" />
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Group Info
+                </div>
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <!-- Nav tabs -->
+
+
+                    <div class="form-group col-md-8">
+                        <label>Group Title :</label>
+                        <input type="text" asp-for="CourseGroup.GroupTitle" class="form-control" />
+                        <span asp-validation-for="CourseGroup.GroupTitle" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1">
+            <input type="submit" class="btn btn-success" value="Create Group" />
+        </div>
+    </div>
+</form>

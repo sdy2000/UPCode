@@ -76,21 +76,21 @@
                         @if (_permissionService.CheckPermission(21, User.Identity.Name))
                         {
                             <li>
-                                <a href="/Admin/Course"><i class="fa fa-mail-forward fa-fw"></i> Course Management</a>
+                                <a href="/Admin/Course"><i class="fa fa-mail-forward fa-fw"></i> Course</a>
                                 <!-- /.nav-second-level -->
                             </li>
                         }
                         @if (_permissionService.CheckPermission(13, User.Identity.Name))
                         {
                             <li>
-                                <a href="/Admin/Course"><i class="fa fa-home fa-fw"></i>Group Management</a>
+                                <a href="/Admin/CourseGroup"><i class="fa fa-home fa-fw"></i>Group</a>
                                 <!-- /.nav-second-level -->
                             </li>
                         }
                         @if (_permissionService.CheckPermission(2, User.Identity.Name))
                         {
                             <li>
-                                <a href="/Admin/Role"><i class="fa fa-users fa-fw"></i> Role Management</a>
+                                <a href="/Admin/Role"><i class="fa fa-users fa-fw"></i> Role</a>
                                 <!-- /.nav-second-level -->
                             </li>
                         }
