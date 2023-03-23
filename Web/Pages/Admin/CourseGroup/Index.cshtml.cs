@@ -1,8 +1,10 @@
+using Core.Security;
 using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages.Admin.CourseGroup
 {
+    [PermissionChecker(21)]
     public class IndexModel : PageModel
     {
         private ICourseService _courseService;
