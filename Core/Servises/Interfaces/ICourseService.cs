@@ -15,6 +15,7 @@ namespace Core.Servises.Interfaces
         #region COURSE
 
         bool AddCourse(Course course);
+        Course GetCourseById(int courseId);
         User GetTeacher(string teacherName); 
         string CourseImagePath(string folderName, string imgName);
         string SaveOrUpDateImg(IFormFile img, string imgName = "No-Photo.jpg");

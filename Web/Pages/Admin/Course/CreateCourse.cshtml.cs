@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Web.Pages.Admin.Course
 {
+    [PermissionChecker(14)]
     public class CreateCourseModel : PageModel
     {
         private ICourseService _courseService;

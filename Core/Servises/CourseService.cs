@@ -36,6 +36,11 @@ namespace Core.Servises
             }
         }
 
+        public Course GetCourseById(int courseId)
+        {
+            return _context.Courses.Find(courseId);
+        }
+
         public User GetTeacher(string teacherName)
         {
             return _context.Users.SingleOrDefault(u => u.UserName == teacherName);
@@ -218,6 +223,7 @@ namespace Core.Servises
                 })
                 .ToList();
         }
+
         public List<SelectListItem> GetSubGroupForManageCourse(int parentId)
         {
             return _context.CourseGroups
