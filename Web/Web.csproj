@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Pages\Admin\Course\EditCourse.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -35,18 +31,6 @@
     <Folder Include="wwwroot\UserAvatar\IconSize\" />
     <Folder Include="wwwroot\UserAvatar\ThumbSize\" />
     <Folder Include="wwwroot\UserAvatar\NormalSize\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Pages\Admin\Course\EditCourse.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Pages\Admin\Course\EditCourse.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Pages\Admin\Course\EditCourse.cshtml" />
   </ItemGroup>
 
 </Project>
