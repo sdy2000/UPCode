@@ -50,6 +50,15 @@ namespace Core.Servises
             }
         }
 
+        public void DeleteCourse(int CourseId)
+        {
+            Course course = _context.Courses.Find(CourseId);
+            course.IsDelete = true;
+
+            if (UpdateCourse(course))
+                SaveChange();
+        }
+
         public Course GetCourseById(int courseId)
         {
             return _context.Courses.Find(courseId);

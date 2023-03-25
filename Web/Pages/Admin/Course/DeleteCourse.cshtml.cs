@@ -22,5 +22,11 @@ namespace Web.Pages.Admin.Course
             ViewData["Teachers"] = _courseService.GetTeacher(User.Identity.Name);
             Course = _courseService.GetCourseById(id);
         }
+        public IActionResult OnPost()
+        {
+            _courseService.DeleteCourse(Course.CourseId);
+
+            return Redirect("/Admin/Course");
+        }
     }
 }

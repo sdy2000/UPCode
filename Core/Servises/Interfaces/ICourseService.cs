@@ -16,6 +16,7 @@ namespace Core.Servises.Interfaces
 
         bool AddCourse(Course course);
         bool UpdateCourse(Course course);
+        void DeleteCourse(int CourseId);
         Course GetCourseById(int courseId);
         User GetTeacher(string teacherName); 
         string CourseImagePath(string folderName, string imgName);
