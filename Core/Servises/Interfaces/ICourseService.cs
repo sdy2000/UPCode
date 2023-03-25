@@ -15,6 +15,7 @@ namespace Core.Servises.Interfaces
         #region COURSE
 
         bool AddCourse(Course course);
+        bool UpdateCourse(Course course);
         Course GetCourseById(int courseId);
         User GetTeacher(string teacherName); 
         string CourseImagePath(string folderName, string imgName);
@@ -22,6 +23,7 @@ namespace Core.Servises.Interfaces
         string SaveOrUpdateFile(IFormFile demoCourse, string CourseDemoName = null, string filePath = "wwwroot/CourseImage/demoes");
 
         int AddCourseFromAdminPanel(Course course, IFormFile imgCourse, IFormFile demoCourse);
+        int UpdateCourseFromAdmin(Course course, IFormFile imgCourse, IFormFile demoCourse);
         List<ShowCourseForAdminViewModel> GetCourseForAdmin(string CourseNameFilter = "");
         List<SelectListItem> GetGroupForManageCourse();
         List<SelectListItem> GetSubGroupForManageCourse(int parentId);

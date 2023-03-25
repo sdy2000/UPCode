@@ -14,17 +14,17 @@
 </div>
 @if (ViewData["IsSuccess"] != null)
 {
-            <div class="alert alert-danger">
-                <p class="help-block">Operation has filde !</p>
-            </div>
+    <div class="alert alert-danger">
+        <p class="help-block">Operation has filde !</p>
+    </div>
 }
 <form method="post" enctype="multipart/form-data" dir="ltr">
 
 
-        <input type="hidden" asp-for="Course.CourseId" />
-        <input type="hidden" asp-for="Course.CourseDemoFileName" />
-        <input type="hidden" asp-for="Course.CourseImageName" />
-        <input type="hidden" asp-for="Course.CreateDate" />
+    <input type="hidden" asp-for="Course.CourseId" />
+    <input type="hidden" asp-for="Course.CourseDemoFileName" />
+    <input type="hidden" asp-for="Course.CourseImageName" />
+    <input type="hidden" asp-for="Course.CreateDate" />
 
 
 
@@ -32,7 +32,7 @@
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                   Course Info
+                    Course Info
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -94,11 +94,11 @@
                     @if (Model.Course.CourseDemoFileName != null)
                     {
 
-                                <div class="form-group col-md-11">
-                                    <video style="width:100%;" controls>
+                        <div class="form-group col-md-11">
+                            <video style="width:100%;" controls>
                                 <source src="/Course/demoes/@Model.Course.CourseDemoFileName" />
-                                    </video>
-                                </div>
+                            </video>
+                        </div>
 
                     }
 
@@ -147,7 +147,7 @@
                 <div class="col-md-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           Status & Level
+                            Status & Level
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -202,46 +202,46 @@
 
 
 @section Scripts{
-            <script>
+    <script>
 
-                $("#Course_GroupId").change(function () {
-                    $("#Course_SubGroupId").empty();
-                    $.getJSON("/Home/GetSubGroups/" + $("#Course_GroupId :selected").val(),
-                        function (data) {
-                            $.each(data,
-                                function () {
-                                    $("#Course_SubGroupId").append('<option value=' + this.value + '>' + this.text + '</option>');
-                                });
-
+        $("#Course_GroupId").change(function () {
+            $("#Course_SubGroupId").empty();
+            $.getJSON("/Home/GetSubGroups/" + $("#Course_GroupId :selected").val(),
+                function (data) {
+                    $.each(data,
+                        function () {
+                            $("#Course_SubGroupId").append('<option value=' + this.value + '>' + this.text + '</option>');
                         });
+
                 });
+        });
 
 
 
-                function readURL(input) {
+        function readURL(input) {
 
-                    if (input.files && input.files[0]) {
-                        var reader = new FileReader();
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-                        reader.onload = function (e) {
-                            $('#imgCourse').attr('src', e.target.result);
-                        }
-
-                        reader.readAsDataURL(input.files[0]);
-                    }
+                reader.onload = function (e) {
+                    $('#imgCourse').attr('src', e.target.result);
                 }
 
-                $("#Course_CourseImageName").change(function () {
-                    readURL(this);
-                });
-            </script>
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 
-            <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
-            <script>
+        $("#Course_CourseImageName").change(function () {
+            readURL(this);
+        });
+    </script>
 
-                CKEDITOR.replace('Course_CourseDescription', {
-                    customConfig: '/js/Config.js'
-                });
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
 
-            </script>
+        CKEDITOR.replace('Course_CourseDescription', {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
 }

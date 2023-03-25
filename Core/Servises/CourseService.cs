@@ -36,6 +36,20 @@ namespace Core.Servises
             }
         }
 
+        public bool UpdateCourse(Course course)
+        {
+            try
+            {
+                _context.Courses.Update(course);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public Course GetCourseById(int courseId)
         {
             return _context.Courses.Find(courseId);
@@ -180,6 +194,19 @@ namespace Core.Servises
 
             AddCourse(course);
             SaveChange();
+
+            return course.CourseId;
+        }
+
+        public int UpdateCourseFromAdmin(Course course, IFormFile imgCourse, IFormFile demoCourse)
+        {
+            course.CourseImageName = SaveOrUpDateImg(imgCourse, course.CourseImageName);
+            course.CourseDemoFileName = SaveOrUpdateFile(demoCourse, course.CourseDemoFileName);
+            course.CoursePrice = (course.CoursePrice == null) ? 0 : course.CoursePrice;
+            course.UpdateDate = DateTime.Now;
+
+            if (UpdateCourse(course))
+                SaveChange();
 
             return course.CourseId;
         }
