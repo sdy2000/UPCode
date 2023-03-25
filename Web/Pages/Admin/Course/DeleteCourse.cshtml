@@ -1,4 +1,74 @@
-﻿@page
+﻿@page "{id}"
+@using DataLayer.Entities.Users;
 @model Web.Pages.Admin.Course.DeleteCourseModel
 @{
+    ViewData["Title"] = "Delete Course";
+    User teacher = ViewData["Teachers"] as User;
 }
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Delete Course</h1>
+    </div>
+</div>
+
+<div class="row" dir="ltr">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Course Info
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <dl class="dl-horizontal">
+
+                    <dt>Course Image:</dt>
+                    <dd>
+                        <img src="/CourseImage/image/@Model.Course.CourseImageName" class="thumbnail" id="imgCourse"
+                             alt="Course Imag" title="Course Image" style="max-width:100%;" />
+                    </dd>
+                    <br />
+
+                    <dt>Course Title :</dt>
+                    <dd>@Model.Course.CourseTitle</dd>
+                    <br />
+
+                    <dt>Description :</dt>
+                    <dd>@Html.Raw(Model.Course.CourseDescription)</dd>
+                    <br />
+
+                    <dt>Create Date:</dt>
+                    <dd>@Model.Course.CreateDate.ToString("MMM/dd/yyyy")</dd>
+                    <br />
+
+                    <dt>Teacher :</dt>
+                    <dd>@(((teacher.FirstName + teacher.LastName) != null) ? (teacher.FirstName + " " + teacher.LastName) : teacher.UserName)</dd>
+                    <br />
+
+                    <dt>Course Level:</dt>
+                    <dd>@Model.Course.CourseLevel</dd>
+                    <br />
+
+                    <dt>Status :</dt>
+                    <dd>@Model.Course.CourseStatus</dd>
+                    <br />
+
+
+
+                    <br />
+                    <dt>
+                        <a href="/Admin/Course" class="btn btn-info">Cancel</a>
+                    </dt>
+                    <dd>
+                        <form method="post">
+                            <input type="hidden" asp-for="Course.CourseId" />
+
+                            <input type="submit" class="btn btn-danger" value="Delete Course" />
+                        </form>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
