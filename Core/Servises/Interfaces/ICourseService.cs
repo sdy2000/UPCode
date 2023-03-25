@@ -3,6 +3,7 @@ using DataLayer.Entities.Courses;
 using DataLayer.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Servises.Interfaces
 {
@@ -30,7 +31,11 @@ namespace Core.Servises.Interfaces
         List<SelectListItem> GetSubGroupForManageCourse(int parentId);
         #endregion
 
+        #region COURSE EPISODE
 
+        List<CourseEpisode> GetAllCourseEpisode(int courseId);
+
+        #endregion
         #region GROUP
 
         List<CourseGroup> GetAllGroup();

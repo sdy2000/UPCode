@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages.Admin.Course
 {
-    [PermissionChecker(17)]
+    [PermissionChecker(16)]
     public class DeleteCourseModel : PageModel
     {
         private ICourseService _courseService;

@@ -276,6 +276,16 @@ namespace Core.Servises
 
 
 
+        // // // // // // // // // Course Episode
+        public List<CourseEpisode> GetAllCourseEpisode(int courseId)
+        {
+            return _context.CourseEpisodes
+                .Where(ce => ce.CourseId == courseId)
+                .ToList();
+        }
+
+
+
 
         // // // // // // // // // Group
         public List<CourseGroup> GetAllGroup()
