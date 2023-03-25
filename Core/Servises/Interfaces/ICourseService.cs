@@ -34,6 +34,9 @@ namespace Core.Servises.Interfaces
         #region COURSE EPISODE
 
         List<CourseEpisode> GetAllCourseEpisode(int courseId);
+        bool AddEpisode(CourseEpisode episode);
+
+        int AddEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp);
 
         #endregion
         #region GROUP

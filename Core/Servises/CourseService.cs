@@ -284,6 +284,30 @@ namespace Core.Servises
                 .ToList();
         }
 
+        public bool AddEpisode(CourseEpisode episode)
+        {
+            try
+            {
+                _context.Courses.Add(episode);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        public int AddEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp)
+        {
+            episode.EpisodFileName = SaveOrUpdateFile(fileUp, null, "wwwroot/Course/CourseFile");
+
+            if (AddEpisode(episode))
+                SaveChange();
+
+            return episode.EpisodeId;
+        }
 
 
 
