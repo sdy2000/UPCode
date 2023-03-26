@@ -284,11 +284,16 @@ namespace Core.Servises
                 .ToList();
         }
 
+        public CourseEpisode GetEpisodeById(int episodeId)
+        {
+            return _context.CourseEpisodes.Find(episodeId);
+        }
+
         public bool AddEpisode(CourseEpisode episode)
         {
             try
             {
-                _context.Courses.Add(episode);
+                _context.CourseEpisodes.Add(episode);
 
                 return true;
             }
