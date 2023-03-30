@@ -1,3 +1,4 @@
+using Core.Security;
 using Core.Servises.Interfaces;
 using DataLayer.Entities.Courses;
 using Microsoft.AspNetCore.Mvc;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Web.Pages.Admin.Course.Episode
 {
+    [PermissionChecker(19)]
     public class EditEpisodeModel : PageModel
     {
         private ICourseService _courseService;
