@@ -19,5 +19,18 @@ namespace Web.Pages.Admin.Course.Episode
         {
             CourseEpisode = _courseService.GetEpisodeById(id);
         }
+
+        public IActionResult OnPost(IFormFile fileUp)
+        {
+            if (string.IsNullOrEmpty(CourseEpisode.EpisodeTitle))
+            {
+                ViewData["IsSuccess"] = false;
+                return Page();
+            }
+
+            _courseService.UpdateEpisodeFormAdmin(CourseEpisode, fileUp);
+
+            return Redirect("/Admin/Course/Episode/Index/" + CourseEpisode.CourseId);
+        }
     }
 }

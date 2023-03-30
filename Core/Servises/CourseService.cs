@@ -303,6 +303,20 @@ namespace Core.Servises
             }
         }
 
+        public bool UpdateEpisode(CourseEpisode episode)
+        {
+            try
+            {
+                _context.CourseEpisodes.Update(episode);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
         public int AddEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp)
         {
@@ -313,7 +327,15 @@ namespace Core.Servises
 
             return episode.EpisodeId;
         }
+        public int UpdateEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp)
+        {
+            episode.EpisodFileName = SaveOrUpdateFile(fileUp, episode.EpisodFileName, "wwwroot/Course/CourseFile");
 
+            if (UpdateEpisode(episode))
+                SaveChange();
+
+            return episode.EpisodeId;
+        }
 
 
         // // // // // // // // // Group
