@@ -1,4 +1,52 @@
-﻿@page
+﻿@page "{id}"
 @model Web.Pages.Admin.Course.Episode.DeleteEpisodeModel
 @{
+    ViewData["Title"] = "Delete Episode";
+    List<string> permissionTitel = ViewData["PermissionTitle"] as List<string>;
 }
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Delete Episode</h1>
+    </div>
+</div>
+
+<div class="row" dir="ltr">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Episode Info
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <!-- Nav tabs -->
+                <dl class="dl-horizontal">
+                    <dt>Episode Title:</dt>
+                    <dd>@Model.CourseEpisode.EpisodeTitle</dd>
+                    <br />
+
+                    <dt>Episode Time :</dt>
+                    <dd>@Model.CourseEpisode.EpisodeTime</dd>
+                    <br />
+
+                    <dt>Create Date :</dt>
+                    <dd>@Model.CourseEpisode.CreateDate.ToString("MMM/dd/yyyy")</dd>
+                    <br />
+
+
+                    <dt>
+                        <a href="/Admin/Role" class="btn btn-info">Cancel</a>
+                    </dt>
+                    <dd>
+                        <form method="post">
+                            <input type="hidden" asp-for="CourseEpisode.CourseId" />
+                            <input type="hidden" asp-for="CourseEpisode.EpisodeId" />
+
+                            <input type="submit" class="btn btn-danger" value="Delete Episode" />
+                        </form>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
