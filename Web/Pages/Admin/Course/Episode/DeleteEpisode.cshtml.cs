@@ -21,5 +21,11 @@ namespace Web.Pages.Admin.Course.Episode
         {
             CourseEpisode = _courseService.GetEpisodeById(id);
         }
+
+        public IActionResult OnPost()
+        {
+            _courseService.DeleteEpisode(CourseEpisode.EpisodeId);
+            return Redirect("/Admin/Course/Episode/" + CourseEpisode.CourseId);
+        }
     }
 }

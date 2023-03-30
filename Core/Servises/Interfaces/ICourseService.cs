@@ -37,6 +37,7 @@ namespace Core.Servises.Interfaces
         CourseEpisode GetEpisodeById(int episodeId);
         bool AddEpisode(CourseEpisode episode); 
         bool UpdateEpisode(CourseEpisode episode);
+        int DeleteEpisode(int episodeId);
 
         int AddEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp);
         int UpdateEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp);

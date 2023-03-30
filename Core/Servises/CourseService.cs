@@ -317,6 +317,18 @@ namespace Core.Servises
             }
         }
 
+        public int DeleteEpisode(int episodeId)
+        {
+            var episode = _context.CourseEpisodes.Find(episodeId);
+
+            episode.IsDelete = true;
+
+            if (UpdateEpisode(episode))
+                SaveChange();
+
+            return episode.EpisodeId;
+        }
+
 
         public int AddEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp)
         {
