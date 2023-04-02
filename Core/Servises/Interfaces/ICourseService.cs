@@ -58,7 +58,7 @@ namespace Core.Servises.Interfaces
 
         Tuple<List<ShowCourseListItemViewModel>, int> GetCourseForView(int pageId = 1, string filter = "", string getType = "all",
            string orderByType = "date", int startPrice = 0, int endPrice = 0, List<int> SelectedGroups = null, int take = 0);
-
+        Course GetCourseForShow(int CourseId);
         #endregion
     }
 }

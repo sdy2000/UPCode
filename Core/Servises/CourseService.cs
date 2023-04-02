@@ -474,5 +474,16 @@ namespace Core.Servises
             return Tuple.Create(query, pageCount);
 
         }
+
+        public Course GetCourseForShow(int CourseId)
+        {
+            return _context.Courses
+                .Include(c => c.CourseEpisodes)
+                .Include(c => c.CourseStatus)
+                .Include(c => c.CourseLevel)
+                .Include(c => c.User)
+                .FirstOrDefault(c => c.CourseId == CourseId);//////////////
+
+        }
     }
 }

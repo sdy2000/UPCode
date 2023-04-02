@@ -1,5 +1,4 @@
-﻿using Core.Servises;
-using Core.Servises.Interfaces;
+﻿using Core.Servises.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers
@@ -21,6 +20,19 @@ namespace Web.Controllers
             ViewBag.Groups = _courseService.GetAllGroup();
             ViewBag.pageId = pageId;
             return View(_courseService.GetCourseForView(pageId, filter, getType, orderByType, startPrice, endPrice, SelectedGroups, 9));
+        }
+
+
+        [Route("ShowCourse/{id}")]
+        public IActionResult ShowCourse(int id, int episodeId = 0)
+        {
+            var course = _courseService.GetCourseForShow(id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
         }
     }
 }
