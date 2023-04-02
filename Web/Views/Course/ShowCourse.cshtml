@@ -125,7 +125,24 @@
                 <div class="statistics">
                     
 
-                    @*////////////////////////*@
+                    <ul>
+                        <li>
+                            <span> Time </span>
+
+                            @{
+                                TimeSpan time = new TimeSpan(Model.CourseEpisodes.Sum(e => e.EpisodeTime.Ticks));
+                            }
+                            <i> @time </i>
+                        </li>
+                        <li>
+                            <span> View Count</span>
+                            <i> @Model.CourseEpisodes.Count() </i>
+                        </li>
+                        <li>
+                            <span> Student Count </span>
+                            @*////////////////////////////*@85555
+                        </li>
+                    </ul>
 
                     @if (Model.CoursePrice != 0 && !IsUserInCourse)
                     {
