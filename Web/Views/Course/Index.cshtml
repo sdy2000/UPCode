@@ -116,7 +116,15 @@
 
                     <section class="terms-items">
 
-                        @*/////////*@
+                        <div class="row">
+                            <!-- col -->
+                            @foreach (var item in Model.Item1)
+                            {
+                                <partial name="_BoxCourse" model="@item" />
+                            }
+
+                            <!-- /col -->
+                        </div>
 
 
                         @if (Model.Item2 > 1)
