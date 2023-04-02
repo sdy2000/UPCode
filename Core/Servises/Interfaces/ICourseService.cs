@@ -13,7 +13,7 @@ namespace Core.Servises.Interfaces
 
 
 
-        #region COURSE
+        #region COURSE ADMIN
 
         bool AddCourse(Course course);
         bool UpdateCourse(Course course);
@@ -31,7 +31,7 @@ namespace Core.Servises.Interfaces
         List<SelectListItem> GetSubGroupForManageCourse(int parentId);
         #endregion
 
-        #region COURSE EPISODE
+        #region COURSE EPISODE ADMIN
 
         List<CourseEpisode> GetAllCourseEpisode(int courseId);
         CourseEpisode GetEpisodeById(int episodeId);
@@ -43,13 +43,21 @@ namespace Core.Servises.Interfaces
         int UpdateEpisodeFormAdmin(CourseEpisode episode, IFormFile fileUp);
 
         #endregion
-        #region GROUP
+
+        #region GROUP ADMIN
 
         List<CourseGroup> GetAllGroup();
         bool AddGroup(CourseGroup group);
         bool UpdateGroup(CourseGroup group);
         void DeleteGroup(int groupId);
         CourseGroup GetGroupById(int groupId);
+
+        #endregion
+
+        #region COURSE VIEW
+
+        Tuple<List<ShowCourseListItemViewModel>, int> GetCourseForView(int pageId = 1, string filter = "", string getType = "all",
+           string orderByType = "date", int startPrice = 0, int endPrice = 0, List<int> SelectedGroups = null, int take = 0);
 
         #endregion
     }

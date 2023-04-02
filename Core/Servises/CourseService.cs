@@ -8,6 +8,7 @@ using DataLayer.Entities.Courses;
 using DataLayer.Entities.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Servises
 {
@@ -21,7 +22,7 @@ namespace Core.Servises
         }
 
 
-        // // // // // // // // // Course
+        // // // // // // // // // Course Admin
         public bool AddCourse(Course course)
         {
             try
@@ -276,7 +277,7 @@ namespace Core.Servises
 
 
 
-        // // // // // // // // // Course Episode
+        // // // // // // // // // Course Episode Admin
         public List<CourseEpisode> GetAllCourseEpisode(int courseId)
         {
             return _context.CourseEpisodes
@@ -350,7 +351,7 @@ namespace Core.Servises
         }
 
 
-        // // // // // // // // // Group
+        // // // // // // // // // Group Admin
         public List<CourseGroup> GetAllGroup()
         {
             return _context.CourseGroups.ToList();
@@ -378,6 +379,100 @@ namespace Core.Servises
         public CourseGroup GetGroupById(int groupId)
         {
             return _context.CourseGroups.Find(groupId);
+        }
+
+
+        // // // // // // // // // Course 
+        public Tuple<List<ShowCourseListItemViewModel>, int> GetCourseForView(int pageId = 1, string filter = "", string getType = "all",
+           string orderByType = "date", int startPrice = 0, int endPrice = 0, List<int> SelectedGroups = null, int take = 0)
+        {
+            IQueryable<Course> result = _context.Courses;
+
+            if (take == 0)
+                take = 8;
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+                result = result.Where(c => c.CourseTitle.Contains(filter) || c.Tags.Contains(filter));
+            }
+            switch (getType)
+            {
+                case "all":
+                    break;
+                case "buy":
+                    {
+                        result = result.Where(c => c.CoursePrice != 0);
+                        break;
+                    }
+                case "free":
+                    {
+                        result = result.Where(c => c.CoursePrice == 0);
+                        break;
+                    }
+            }
+
+            switch (orderByType)
+            {
+                case "date":
+                    {
+                        result = result.OrderByDescending(c => c.CreateDate);
+                        break;
+                    }
+                case "updatedate":
+                    {
+                        result = result.OrderByDescending(c => c.UpdateDate);
+                        break;
+                    }
+            }
+
+            if (startPrice > 0)
+            {
+                result = result.Where(c => c.CoursePrice > startPrice);
+            }
+            if (endPrice > 0)
+            {
+                result = result.Where(c => c.CoursePrice < endPrice);
+            }
+
+            if (SelectedGroups != null && SelectedGroups.Any())
+            {
+                foreach (int groupId in SelectedGroups)
+                {
+                    result = result.Where(c => c.GroupId == groupId || c.SubGroupId == groupId);
+                }
+            }
+
+
+            int skip = (pageId - 1) * take;
+
+            int pageCount = result
+                .Include(c => c.CourseEpisodes)
+                .Select(c => new ShowCourseListItemViewModel()
+                {
+                    CourseId = c.CourseId,
+                    ImageName = c.CourseImageName,
+                    Price = c.CoursePrice,
+                    CourseTitle = c.CourseTitle,
+
+                }).Count() / take;
+
+
+            var query = result
+                .Include(c => c.CourseEpisodes)
+                .Select(c => new ShowCourseListItemViewModel()
+                {
+                    CourseId = c.CourseId,
+                    ImageName = c.CourseImageName,
+                    Price = c.CoursePrice,
+                    CourseTitle = c.CourseTitle,
+                    CourseEpisodes = c.CourseEpisodes
+                })
+                .Skip(skip).Take(take)
+                .ToList();
+
+
+            return Tuple.Create(query, pageCount);
+
         }
     }
 }
