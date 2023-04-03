@@ -17,6 +17,8 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.LastestCourse = _courseService.GetLastestCourse();
+            ViewBag.PopularCourse = _courseService.GetPopularCourse();
             return View();
         }
 

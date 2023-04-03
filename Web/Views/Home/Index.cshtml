@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Core.DTOs;
+@{
     ViewData["Title"] = "Index";
 }
 
@@ -24,86 +25,19 @@
                 <h2> Latest UPCode courses </h2>
                 <a href=""> View all courses </a>
             </header>
+
+            @{
+                List<ShowCourseListItemViewModel> lastestCourse = ViewBag.LastestCourse as List<ShowCourseListItemViewModel>;
+            }
             <div class="row">
                 <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/1.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/2.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/3.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 150.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/4.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/5.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 15.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/6.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/7.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 20.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/8.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 75.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
+                @if (lastestCourse != null)
+                {
+                    @foreach (var item in lastestCourse)
+                    {
+                        <partial name="_BoxCourse" model="@item" />
+                    }
+                }
                 <!-- /col -->
             </div>
         </section>
@@ -115,86 +49,19 @@
                 <h2> Popular UPCode courses </h2>
                 <a href=""> View all courses </a>
             </header>
+
+            @{
+                List<ShowCourseListItemViewModel> pubulerCourse = ViewBag.PopularCourse as List<ShowCourseListItemViewModel>;
+            }
             <div class="row">
                 <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/1.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/2.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/3.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 150.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/4.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/5.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 15.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/6.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> Free </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/7.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 20.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
-                <!-- /col -->
-                <!-- col -->
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
-                    <article>
-                        <a href="" class="img-layer"><img src="/images/pic/8.jpg"></a>
-                        <h2><a href=""> Teaching Material Design in Xamarin </a></h2>
-                        <span> 75.000 $ </span>
-                        <i>1:52:32</i>
-                    </article>
-                </div>
+                @if (pubulerCourse != null)
+                {
+                    @foreach (var item in pubulerCourse)
+                    {
+                        <partial name="_BoxCourse" model="@item" />
+                    }
+                }
                 <!-- /col -->
             </div>
         </section>

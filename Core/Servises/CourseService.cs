@@ -483,8 +483,40 @@ namespace Core.Servises
                 .Include(c => c.CourseLevel)
                 .Include(c => c.User)
                 .Include(c => c.UserCourses)
-                .FirstOrDefault(c => c.CourseId == CourseId);//////////////
+                .FirstOrDefault(c => c.CourseId == CourseId);
 
+        }
+
+        public List<ShowCourseListItemViewModel> GetLastestCourse()
+        {
+            return _context.Courses
+                .OrderByDescending(d => d.CreateDate)
+                .Select(c => new ShowCourseListItemViewModel()
+                {
+                    CourseId = c.CourseId,
+                    ImageName = c.CourseImageName,
+                    Price = c.CoursePrice,
+                    CourseTitle = c.CourseTitle,
+                    CourseEpisodes = c.CourseEpisodes
+                })
+                .Take(8)
+                .ToList();
+        }
+
+        public List<ShowCourseListItemViewModel> GetPopularCourse()
+        {
+            return _context.Courses
+                .OrderByDescending(d => d.OrderDetails.Count)
+                .Select(c => new ShowCourseListItemViewModel()
+                {
+                    CourseId = c.CourseId,
+                    ImageName = c.CourseImageName,
+                    Price = c.CoursePrice,
+                    CourseTitle = c.CourseTitle,
+                    CourseEpisodes = c.CourseEpisodes
+                })
+                .Take(8)
+                .ToList();
         }
     }
 }
