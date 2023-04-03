@@ -3,9 +3,9 @@
 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
     <article>
         <a href="/ShowCourse/@Model.CourseId" class="img-layer">
-            <img style="height:200px" src="/CourseImage/thumb/@Model.ImageName">
+            <img style="height:200px" src="/Course/ThumbSize/@Model.ImageName">
         </a>
-        <h2><a href="/Course/ThumbSize/@Model.ImageName"> @Model.CourseTitle </a></h2>
+        <h2><a href="/ShowCourse/@Model.CourseId"> @Model.CourseTitle </a></h2>
         <span>
             @((Model.Price == 0) ? "Free" : Model.Price.ToString("#,0"))
         </span>
