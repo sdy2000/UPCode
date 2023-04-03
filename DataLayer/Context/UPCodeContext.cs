@@ -21,6 +21,7 @@ namespace DataLayer.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<UserGender> UserGenders { get; set; }
+        public DbSet<UserCourse> UserCourses { get; set; }
 
         #endregion
 

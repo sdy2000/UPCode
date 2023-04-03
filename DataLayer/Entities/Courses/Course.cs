@@ -105,6 +105,7 @@ namespace DataLayer.Entities.Courses
 
         public List<CourseComment> CourseComments { get; set; }
         public virtual List<OrderDetail> OrderDetails { get; set; }
+        public List<UserCourse> UserCourses { get; set; }
 
         #endregion
     }
