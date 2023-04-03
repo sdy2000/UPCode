@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Datalayer.Entities.Wallets;
 using DataLayer.Entities.Courses;
+using DataLayer.Entities.Orders;
 
 namespace DataLayer.Entities.Users
 {
@@ -79,6 +80,7 @@ namespace DataLayer.Entities.Users
         public List<UserRole> UserRoles { get; set; }
         public List<Wallet> Wallets { get; set; }
         public List<CourseComment> CourseComments { get; set; }
+        public virtual List<Order> Orders { get; set; }
 
         #endregion
 

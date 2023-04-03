@@ -1,5 +1,6 @@
 ﻿using Datalayer.Entities.Wallets;
 using DataLayer.Entities.Courses;
+using DataLayer.Entities.Orders;
 using DataLayer.Entities.Permissions;
 using DataLayer.Entities.Users;
 using Microsoft.EntityFrameworkCore;
@@ -45,6 +46,13 @@ namespace DataLayer.Context
         public DbSet<CourseStatus> CourseStatuses { get; set; }
         public DbSet<CourseEpisode> CourseEpisodes { get; set; }
         public DbSet<CourseComment> CourseComments { get; set; }
+
+        #endregion
+
+        #region Order
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
 
         #endregion
 

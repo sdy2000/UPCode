@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using DataLayer.Entities.Users;
+using DataLayer.Entities.Orders;
 
 namespace DataLayer.Entities.Courses
 {
@@ -103,6 +104,7 @@ namespace DataLayer.Entities.Courses
         public List<CourseEpisode> CourseEpisodes { get; set; }
 
         public List<CourseComment> CourseComments { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
 
         #endregion
     }
